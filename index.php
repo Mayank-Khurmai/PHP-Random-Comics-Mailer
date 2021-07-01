@@ -19,21 +19,22 @@
             <div id="step-1">
                 <div class="section"><span>1</span>Enter your Email Address</div>
                 <div class="inner-wrap">
-                    <label>Email Address <input type="email" name="user_mail" id="user_mail" value="mayank@gmail.com"/></label>
+                    <label>Email Address <input type="email" name="user_mail" id="user_mail" value="mayank@gmail.com" /></label>
+                    <label id="email-warn">Incorrect Email !</label>
                 </div>
             </div>
 
             <div id="step-2">
                 <div class="section"><span>2</span>Enter OTP</div>
                 <div class="inner-wrap">
-                    <label>Enter OTP sent to Email <input type="number" name="otp" id="otp"/></label>
+                    <label>Enter OTP sent to your Email <input type="number" name="otp" id="otp" /></label>
+                    <label id="otp-warn">Incorrect OTP !</label>
                 </div>
             </div>
 
             <div class="button-section">
-                <input type="button" value="Send OTP" onclick="send_otp();" flag="1" />
+                <input type="button" value="Send OTP" onclick="send_otp();" flag="step-1" id="s-otp-button" />
             </div>
-
         </form>
     </div>
 
