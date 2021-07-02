@@ -27,7 +27,7 @@
             <div id="step-2">
                 <div class="section"><span>2</span>Enter OTP</div>
                 <div class="inner-wrap">
-                    <label>Enter OTP sent to your Email <input type="number" name="otp" id="otp" /></label>
+                    <label>Enter OTP sent to your Email <input type="number" name="otp" id="otp" value="123456"/></label>
                     <label id="otp-warn"></label>
                 </div>
             </div>
