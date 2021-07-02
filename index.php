@@ -19,8 +19,8 @@
             <div id="step-1">
                 <div class="section"><span>1</span>Enter your Email Address</div>
                 <div class="inner-wrap">
-                    <label>Email Address <input type="email" name="user_mail" id="user_mail" value="mayank@gmail.com" /></label>
-                    <label id="email-warn">Incorrect Email !</label>
+                    <label>Email Address <input type="email" name="user_mail" id="user_mail" value="aayushi@gmail.com" /></label>
+                    <label id="email-warn"></label>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                 <div class="section"><span>2</span>Enter OTP</div>
                 <div class="inner-wrap">
                     <label>Enter OTP sent to your Email <input type="number" name="otp" id="otp" /></label>
-                    <label id="otp-warn">Incorrect OTP !</label>
+                    <label id="otp-warn"></label>
                 </div>
             </div>
 

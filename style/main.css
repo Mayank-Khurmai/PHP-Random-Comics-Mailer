@@ -118,7 +118,6 @@ body {
 
 #email-warn, #otp-warn{
     color: red !important;
-    display: none;
 }
 
 #step-2{
