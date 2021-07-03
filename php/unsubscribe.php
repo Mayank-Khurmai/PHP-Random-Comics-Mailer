@@ -10,8 +10,36 @@
 
 <body>
 
+<div class="form-style">
 
-    <script src="./script/main.js"></script>
+        <div id="tick-icon-div">
+            <img src="https://img.icons8.com/color/96/000000/approval--v3.gif" />
+            <div>
+                <span>Congratulations! you has been successfully Unsubscribed.</span>
+            </div>
+            <a href="../index.php">Click to Subscribe</a>
+        </div>
+
+
+        <div id="form-style-div">
+            <h1>Unsuscribe Now!<span>By Unsuscribing, you will not receive any XKCD comics email!</span></h1>
+            <form>
+
+                <div class="section"><span>#</span>Enter your Email Address</div>
+                <div class="inner-wrap">
+                    <label>Email Address <input type="email" name="user_mail" id="user_mail" value="aayushi@gmail.com" /></label>
+                    <label id="email-warn"></label>
+                </div>
+
+                <div class="button-section">
+                    <input type="button" value="Unsuscribe" onclick="unsuscribe();" id="s-otp-button"/>
+                </div>
+
+            </form>
+        </div>
+
+
+        <script src="../script/unsubscribe.js"></script>
 
 </body>
 
