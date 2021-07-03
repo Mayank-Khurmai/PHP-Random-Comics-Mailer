@@ -123,3 +123,17 @@ body {
 #step-2{
     display: none;
 }
+
+.tick-icon-div{
+    text-align: center;
+}
+
+.tick-icon-div div{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.tick-icon-div span{
+    font-size: large;
+    font-family: 'Trebuchet MS', 'cursive', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

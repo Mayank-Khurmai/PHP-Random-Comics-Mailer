@@ -13,7 +13,16 @@
 
 
     <div class="form-style">
-        <h1>Sign Up Now!<span>Sign up to get random XKCD comics every five minutes!</span></h1>
+        <div class="tick-icon-div">
+            <img src="https://img.icons8.com/color/96/000000/approval--v3.gif"/>
+            <div>
+                <span>Congratulations! your Email has been successfully verified.</span>
+            </div>
+            <a href="">Click to Unsuscribe</a>            
+        </div>
+
+
+        <!-- <h1>Sign Up Now!<span>Sign up to get random XKCD comics every five minutes!</span></h1>
         <form>
 
             <div id="step-1">
@@ -35,7 +44,8 @@
             <div class="button-section">
                 <input type="button" value="Send OTP" onclick="send_otp();" flag="step-1" id="s-otp-button" />
             </div>
-        </form>
+
+        </form> -->
     </div>
 
     <script src="./script/main.js"></script>
