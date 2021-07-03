@@ -8,6 +8,16 @@ class main
     private $query;
     private $response;
     private $user_mail;
+    private $header;
+    private $message;
+
+    public function send_mail_fun($user_mail){
+        $this->user_mail = $user_mail;
+        $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
+        $this->message = "<h3>Hi User, you you will not receive any email XKCD Comics more.</h3><span>If you want to subscribe again, the click on <a href='www.google.com'>subscribe</a></span>";
+        mail($this->user_mail,"Email Unsubscription",$this->message,$this->header);
+    }
+
 
     public function __construct()
     {
@@ -31,8 +41,8 @@ class main
             $this->query = "UPDATE user_data SET otp=0 WHERE email = '$this->user_mail'";
             if ($this->db->query($this->query)) {
                 $this->db->close();
+                $this->send_mail_fun($this->user_mail);
                 echo "Email Unsubscribed";
-                
             } 
             else {
                 $this->db->close();
