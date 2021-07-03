@@ -32,6 +32,7 @@ class main
             if ($this->db->query($this->query)) {
                 $this->db->close();
                 echo "Email Unsubscribed";
+                
             } 
             else {
                 $this->db->close();

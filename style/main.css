@@ -124,16 +124,21 @@ body {
     display: none;
 }
 
-.tick-icon-div{
+#tick-icon-div{
     text-align: center;
+    display: none;
 }
 
-.tick-icon-div div{
+#tick-icon-div a{
+    color: rgb(37, 87, 121);
+}
+
+#tick-icon-div div{
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-.tick-icon-div span{
+#tick-icon-div span{
     font-size: large;
     font-family: 'Trebuchet MS', 'cursive', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
