@@ -13,14 +13,14 @@ function final_step(){
     document.getElementById("tick-icon-div").style.display = "block";
 }
 
-function unsuscribe_request(user_mail){
+function unsubscribe_request(user_mail){
     document.getElementById("s-otp-button").value = "Unsubscribing...";
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "../php/verify-unsubscribe.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText.trim() == "Email Unsuscribed"){
+            if(this.responseText.trim() == "Email Unsubscribed"){
                 final_step();
             }
             else if(this.responseText.trim() == "Invalid Email"){
@@ -40,12 +40,12 @@ function unsuscribe_request(user_mail){
     xhttp.send("email="+user_mail);
 }
 
-function unsuscribe(){
+function unsubscribe(){
     var email_warn = document.getElementById("email-warn");
     var user_mail = document.getElementById("user_mail").value;
     if (user_mail != "" & email_validate(user_mail)) {
         email_warn.innerHTML = "";
-        unsuscribe_request(user_mail);
+        unsubscribe_request(user_mail);
     }
     else {
         email_warn.innerHTML = "Invalid Email !";

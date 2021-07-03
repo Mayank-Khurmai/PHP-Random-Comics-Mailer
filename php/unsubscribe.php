@@ -22,7 +22,7 @@
 
 
         <div id="form-style-div">
-            <h1>Unsuscribe Now!<span>By Unsuscribing, you will not receive any XKCD comics email!</span></h1>
+            <h1>Unsubscribe Now!<span>By Unsubscribing, you will not receive any XKCD comics email!</span></h1>
             <form>
 
                 <div class="section"><span>#</span>Enter your Email Address</div>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="button-section">
-                    <input type="button" value="Unsuscribe" onclick="unsuscribe();" id="s-otp-button"/>
+                    <input type="button" value="Unsubscribe" onclick="unsubscribe();" id="s-otp-button"/>
                 </div>
 
             </form>
