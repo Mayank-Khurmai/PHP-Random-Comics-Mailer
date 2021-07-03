@@ -10,11 +10,21 @@ class main
     private $user_mail;
     private $otp;
     private $data;
+    private $header;
+    private $message;
     
     public function send_mail_fun($user_mail, $otp){
         $this->user_mail = $user_mail;
         $this->otp = $otp;
-        echo "OTP Sent Successfully";
+        $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
+        $this->message = "<h3>Your OTP for email verification is : <span style='color:red'>".$this->otp."</span></h3>";
+
+        if(mail("mayankkhurmai8@gmail.com","Email OTP Verification",$this->message,$this->header)){
+            echo "OTP Sent Successfully";
+        }
+        else{
+            echo "Please try Again";
+        }
     }
 
     public function __construct()
