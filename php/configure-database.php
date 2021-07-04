@@ -15,7 +15,8 @@
                 $this->query = "CREATE TABLE user_data(
                     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                     email VARCHAR(40) NOT NULL UNIQUE,
-                    otp INT(7) DEFAULT 0
+                    otp INT(6) DEFAULT 0,
+                    count INT(5) DEFAULT 0 
                 )";
                 if($this->db->query($this->query)){
                     echo "Table Created Successfully";
