@@ -12,11 +12,29 @@
     <div class="body-container">
 
         <div id="side-menu-nav">
-            bfb
+            <div class="side-menu-logo">
+                <img src="https://avatars.githubusercontent.com/u/65281650?s=200&v=4" height="120px">
+            </div>
+            <hr width="70%">
+            <div>
+                <ul id="side-menu-nav-ul">
+                    <li>Dashboard</li>
+                    <li>View Users</li>
+                    <li>Add User</li>
+                    <li>Remove User</li>
+                    <li>Edit User</li> 
+                    <li>Logout</li>
+                </ul>
+            </div>
         </div>
         
-        <div class="right-main-div">
-        bfvvf
+        <div id="right-main-div">
+            <div id="right-main-div-header">
+                fkhgfgk
+            </div>
+            <div id="right-main-output">
+                gvkhgfvtc
+            </div>
         </div>
     </div>
 
