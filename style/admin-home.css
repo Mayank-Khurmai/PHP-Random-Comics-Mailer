@@ -68,7 +68,7 @@ body {
 }
 
 #right-main-output{
-    width: 100%;
+    overflow-y: auto !important;
 }
 
 .dashboard-top > div{
@@ -106,11 +106,18 @@ legend {
     background-color: #000;
     color: #fff;
     padding: 3px 6px;
-}
-
-fieldset > table > td{
-}   
+} 
 
 .text-center{
     text-align: center;
+}
+
+.dashboard-table{
+    padding-top: 10px;
+}
+
+.dashboard-table > div{
+    padding: 10px;
+    padding-top: 50px;
+    float: left;
 }
