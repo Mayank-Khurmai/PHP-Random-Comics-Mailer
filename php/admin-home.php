@@ -18,12 +18,12 @@
             <hr width="70%">
             <div>
                 <ul id="side-menu-nav-ul">
-                    <li><img src="https://img.icons8.com/ios-filled/20/000000/dashboard.png"/> Dashboard</li>
-                    <li><img src="https://img.icons8.com/ios-glyphs/20/000000/user.png"/> View Users</li>
-                    <li><img src="https://img.icons8.com/ios-filled/20/000000/add--v1.png"/> Add User</li>
-                    <li><img src="https://img.icons8.com/ios-glyphs/20/000000/minus.png"/> Remove User</li>
-                    <li><img src="https://img.icons8.com/material-sharp/20/000000/edit--v1.png"/> Edit User</li>
-                    <li><img src="https://img.icons8.com/ios-filled/20/000000/logout-rounded-up.png"/> Logout</li>
+                    <li class="active" onclick="nav_selection('dashboard')"><img src="https://img.icons8.com/ios-filled/20/000000/dashboard.png"/> Dashboard</li>
+                    <li onclick="nav_selection('view')"><img src="https://img.icons8.com/ios-glyphs/20/000000/user.png"/> View Users</li>
+                    <li onclick="nav_selection('add')"><img src="https://img.icons8.com/ios-filled/20/000000/add--v1.png"/> Add User</li>
+                    <li onclick="nav_selection('remove')"><img src="https://img.icons8.com/ios-glyphs/20/000000/minus.png"/> Remove User</li>
+                    <li onclick="nav_selection('edit')"><img src="https://img.icons8.com/material-sharp/20/000000/edit--v1.png"/> Edit User</li>
+                    <li onclick="nav_selection('logout')"><img src="https://img.icons8.com/ios-filled/20/000000/logout-rounded-up.png"/> Logout</li>
                 </ul>
             </div>
         </div>
@@ -137,7 +137,7 @@
     </div>
 
 
-    <!-- <script src="../script/admin-home.js"></script> -->
+    <script src="../script/admin-home.js"></script>
 
 </body>
 

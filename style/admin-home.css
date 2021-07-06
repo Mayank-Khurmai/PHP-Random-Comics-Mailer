@@ -20,6 +20,7 @@ body {
     height: 100%;
     float: left;
     background-color: #FFFFFF;
+    box-shadow: -40px 5px 0px 0px rgb(112, 112, 112);
 }
 
 .side-menu-logo{
@@ -32,7 +33,7 @@ body {
     padding: 0;
 }
 
-#side-menu-nav-ul >li{
+#side-menu-nav-ul > li{
     margin-bottom: 5px;
     font-weight: bold;
     display: block;
@@ -41,8 +42,13 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+#side-menu-nav-ul > li.active{
+    background-color: rgb(138, 136, 136);
+    color: white;
+}
+
 #side-menu-nav-ul >li:hover{
-    background-color: #555;
+    background-color: rgb(122, 122, 122);
     color: white;
     cursor: pointer;
   }
