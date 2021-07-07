@@ -63,3 +63,47 @@ function nav_selection_add(){
         </fieldset>
     `;
 }
+
+
+function nav_selection_remove(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "./admin-view-users.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            x = JSON.parse(this.responseText);
+            console.log(x);
+            var output_area = document.getElementById("right-main-output");
+
+            var table_data;
+            for(var i=0;i<x.length;i++){
+                table_data += `
+                    <tr>
+                        <td class="text-center">`+ x[i].id +`</td>
+                        <td>`+ x[i].email +`</td>
+                        <td class="text-center">`+ x[i].count +`</td>
+                        <td>Remove</td>
+                    </tr>
+                `;
+            }
+            output_area.innerHTML = `
+                <fieldset>
+                <legend>Top Users</legend>
+                <table border='1px solid black' cellspacing='0px' cellpadding='10px' width='100%'>
+                    <tr>
+                        <th class="text-center">Sr.</th>
+                        <th>Email</th>
+                        <th class="text-center">Total</th>
+                        <th>Action</th>
+                    </tr>
+                   `+ 
+                    table_data
+                   +`
+                </table>
+                </fieldset>
+            `;
+            
+        }
+    }
+    xhttp.send();
+}
