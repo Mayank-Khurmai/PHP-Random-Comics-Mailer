@@ -51,3 +51,15 @@ function nav_selection_view() {
     }
     xhttp.send();
 }
+
+
+function nav_selection_add(){
+    document.getElementById("right-main-output").innerHTML = `
+        <fieldset>
+        <legend>Add User Manually</legend>
+        <input type='email' id='add-email' style='width:100%; padding:10px'>
+        <br><br>
+        <input type='button' value='Add User'>
+        </fieldset>
+    `;
+}
