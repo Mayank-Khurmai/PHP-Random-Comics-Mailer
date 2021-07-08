@@ -253,7 +253,7 @@ function nav_selection_edit() {
             for (var i = 0; i < data.length; i++) {
                 var tr = document.createElement("tr");
                 var th_sr = document.createElement("td");
-                th_sr.innerHTML = i+1;
+                th_sr.innerHTML = i + 1;
                 tr.append(th_sr);
 
                 var th_id = document.createElement("td");
@@ -262,12 +262,12 @@ function nav_selection_edit() {
 
                 var th_email = document.createElement("td");
                 th_email.innerHTML = data[i].email;
-                th_email.setAttribute("edit_email_id",data[i].id);
+                th_email.setAttribute("edit_email_id", data[i].id);
                 tr.append(th_email);
 
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
-                th_total.setAttribute("edit_count_id",data[i].id);
+                th_total.setAttribute("edit_count_id", data[i].id);
                 tr.append(th_total);
 
                 var th_status = document.createElement("td");
@@ -280,7 +280,7 @@ function nav_selection_edit() {
                 else {
                     th_status.innerHTML = "Un-verified";
                 }
-                th_status.setAttribute("edit_status_id",data[i].id);
+                th_status.setAttribute("edit_status_id", data[i].id);
                 tr.append(th_status);
 
                 var th_edit = document.createElement("td");
@@ -379,27 +379,63 @@ function admin_remove_user(id) {
 
 nav_selection_edit();
 
-function admin_edit_details(id){
-    var action = document.querySelector("[user_edit_id='"+id+"']");
-    if(action.innerHTML.trim()=="Edit"){
-        action.innerHTML="Save";
+function admin_edit_details(id) {
+    var action = document.querySelector("[user_edit_id='" + id + "']");
+    var edit_email = document.querySelector("[edit_email_id='" + id + "']");
+    var edit_count = document.querySelector("[edit_count_id='" + id + "']");
+    var edit_status = document.querySelector("[edit_status_id='" + id + "']");
+    if (action.innerHTML.trim() == "Edit") {
+        action.innerHTML = "Save";
         action.style.color = "green";
-
-        var edit_email = document.querySelector("[edit_email_id='"+id+"']");
-        var edit_count = document.querySelector("[edit_count_id='"+id+"']");
-        var edit_status = document.querySelector("[edit_status_id='"+id+"']");
 
         edit_email.style.border = "2px solid red";
         edit_count.style.border = "2px solid red";
         edit_status.style.border = "2px solid red";
 
-        edit_email.setAttribute("contenteditable",true);
-        edit_count.setAttribute("contenteditable",true);
-        edit_status.setAttribute("contenteditable",true);
+        edit_email.setAttribute("contenteditable", true);
+        edit_count.setAttribute("contenteditable", true);
+        edit_status.setAttribute("contenteditable", true);
+
     }
+    else {
+        var flag = 0;
+        if (edit_email.innerHTML != "" && email_validate(edit_email.innerHTML)) {
+            edit_email.style.border = "2px solid red";
+            flag += 1;
+        }
+        else {
+            edit_email.style.border = "2px dashed red";
+        }
+        if (edit_count.innerHTML != "" && isNaN(parseInt(edit_count.innerHTML)) == false) {
+            edit_count.style.border = "2px solid red";
+            flag += 1;
+        }
+        else {
+            edit_count.style.border = "2px dashed red";
+        }
+        if (edit_status.innerHTML != "") {
+            edit_status.style.border = "2px solid red";
+            flag += 1;
+        }
+        else {
+            edit_status.style.border = "2px dashed red";
+        }
 
-
-
-
-    console.log(edit_email.innerHTML + edit_count.innerHTML + edit_status.innerHTML);
+        if (flag == 3) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "./admin-update-user-details.php", true);
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhttp.onload = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText.trim() == "Success") {
+                        nav_selection_remove();
+                    }
+                    else {
+                        nav_selection_remove();
+                    }
+                }
+            }
+            xhttp.send("id=" + id + "email=" + edit_email.innerHTML + "count=" + edit_count.innerHTML + "status=" + edit_status.innerHTML);
+        }
+    }
 }
