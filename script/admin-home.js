@@ -45,13 +45,13 @@ function nav_selection_view() {
             th_email.innerHTML = "EMAIL";
             tr.append(th_email);
 
-            var th_status = document.createElement("th");
-            th_status.innerHTML = "Status";
-            tr.append(th_status);
-
             var th_total = document.createElement("th");
             th_total.innerHTML = "Count";
             tr.append(th_total);
+
+            var th_status = document.createElement("th");
+            th_status.innerHTML = "Status";
+            tr.append(th_status);
 
             table.append(tr);
 
@@ -69,6 +69,10 @@ function nav_selection_view() {
                 th_email.innerHTML = data[i].email;
                 tr.append(th_email);
 
+                var th_total = document.createElement("td");
+                th_total.innerHTML = data[i].count;
+                tr.append(th_total);
+
                 var th_status = document.createElement("td");
                 if (data[i].otp == 0) {
                     th_status.innerHTML = "Unsubscribed";
@@ -80,10 +84,6 @@ function nav_selection_view() {
                     th_status.innerHTML = "Un-verified";
                 }
                 tr.append(th_status);
-
-                var th_total = document.createElement("td");
-                th_total.innerHTML = data[i].count;
-                tr.append(th_total);
                 table.append(tr);
             }
             fieldset.append(table);
@@ -143,13 +143,13 @@ function nav_selection_remove() {
             th_email.innerHTML = "EMAIL";
             tr.append(th_email);
 
-            var th_status = document.createElement("th");
-            th_status.innerHTML = "Status";
-            tr.append(th_status);
-
             var th_total = document.createElement("th");
             th_total.innerHTML = "Count";
             tr.append(th_total);
+
+            var th_status = document.createElement("th");
+            th_status.innerHTML = "Status";
+            tr.append(th_status);
 
             var th_action = document.createElement("th");
             th_action.innerHTML = "Action";
@@ -171,6 +171,10 @@ function nav_selection_remove() {
                 th_email.innerHTML = data[i].email;
                 tr.append(th_email);
 
+                var th_total = document.createElement("td");
+                th_total.innerHTML = data[i].count;
+                tr.append(th_total);
+
                 var th_status = document.createElement("td");
                 if (data[i].otp == 0) {
                     th_status.innerHTML = "Unsubscribed";
@@ -182,10 +186,6 @@ function nav_selection_remove() {
                     th_status.innerHTML = "Un-verified";
                 }
                 tr.append(th_status);
-
-                var th_total = document.createElement("td");
-                th_total.innerHTML = data[i].count;
-                tr.append(th_total);
 
                 var th_action = document.createElement("td");
                 th_action.innerHTML = "<span class='link' onclick='admin_remove_user(" + data[i].id + ")'>Remove</span>";
@@ -227,6 +227,10 @@ function nav_selection_edit() {
             th_sr.innerHTML = "Serial";
             tr.append(th_sr);
 
+            var th_id = document.createElement("th");
+            th_id.innerHTML = "User Id";
+            tr.append(th_id);
+
             var th_email = document.createElement("th");
             th_email.innerHTML = "EMAIL";
             tr.append(th_email);
@@ -234,6 +238,11 @@ function nav_selection_edit() {
             var th_total = document.createElement("th");
             th_total.innerHTML = "Count";
             tr.append(th_total);
+
+            var th_status = document.createElement("th");
+            th_status.innerHTML = "Status";
+            tr.append(th_status);
+
 
             var th_edit = document.createElement("th");
             th_edit.innerHTML = "Action";
@@ -244,19 +253,38 @@ function nav_selection_edit() {
             for (var i = 0; i < data.length; i++) {
                 var tr = document.createElement("tr");
                 var th_sr = document.createElement("td");
-                th_sr.innerHTML = data[i].id;
+                th_sr.innerHTML = i+1;
                 tr.append(th_sr);
+
+                var th_id = document.createElement("td");
+                th_id.innerHTML = data[i].id;
+                tr.append(th_id);
 
                 var th_email = document.createElement("td");
                 th_email.innerHTML = data[i].email;
+                th_email.setAttribute("edit_email_id",data[i].id);
                 tr.append(th_email);
 
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
+                th_total.setAttribute("edit_count_id",data[i].id);
                 tr.append(th_total);
 
+                var th_status = document.createElement("td");
+                if (data[i].otp == 0) {
+                    th_status.innerHTML = "Unsubscribed";
+                }
+                else if (data[i].otp == 1) {
+                    th_status.innerHTML = "Subscribed";
+                }
+                else {
+                    th_status.innerHTML = "Un-verified";
+                }
+                th_status.setAttribute("edit_status_id",data[i].id);
+                tr.append(th_status);
+
                 var th_edit = document.createElement("td");
-                th_edit.innerHTML = "Edit";
+                th_edit.innerHTML = "<span class='link' user_edit_id='" + data[i].id + "' onclick='admin_edit_details(" + data[i].id + ")'>Edit</span>";;
                 tr.append(th_edit);
 
                 table.append(tr);
@@ -305,7 +333,7 @@ function add_user_request(user_mail) {
                 setTimeout(
                     () => {
                         nav_selection_add()
-                    }, 4000);
+                    }, 2500);
             }
             else if (this.responseText.trim() == "Invalid Email") {
                 email_warn.innerHTML = "Invalid Email !";
@@ -347,4 +375,31 @@ function admin_remove_user(id) {
         }
     }
     xhttp.send("id=" + id);
+}
+
+nav_selection_edit();
+
+function admin_edit_details(id){
+    var action = document.querySelector("[user_edit_id='"+id+"']");
+    if(action.innerHTML.trim()=="Edit"){
+        action.innerHTML="Save";
+        action.style.color = "green";
+
+        var edit_email = document.querySelector("[edit_email_id='"+id+"']");
+        var edit_count = document.querySelector("[edit_count_id='"+id+"']");
+        var edit_status = document.querySelector("[edit_status_id='"+id+"']");
+
+        edit_email.style.border = "2px solid red";
+        edit_count.style.border = "2px solid red";
+        edit_status.style.border = "2px solid red";
+
+        edit_email.setAttribute("contenteditable",true);
+        edit_count.setAttribute("contenteditable",true);
+        edit_status.setAttribute("contenteditable",true);
+    }
+
+
+
+
+    console.log(edit_email.innerHTML + edit_count.innerHTML + edit_status.innerHTML);
 }

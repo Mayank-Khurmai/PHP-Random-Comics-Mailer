@@ -157,10 +157,11 @@ input[type="button"]:hover{
 }
 
 .link{
-    text-decoration: underline;
+    color: red;
     cursor: pointer;
 }
 
 .link:hover{
-    color: red;
+    color:  black;
+    text-decoration: underline;
 }
