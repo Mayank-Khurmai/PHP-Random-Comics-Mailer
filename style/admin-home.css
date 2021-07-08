@@ -155,3 +155,12 @@ input[type="button"]:hover{
 #admin-add-user-warn{
     color: red !important;
 }
+
+.link{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.link:hover{
+    color: red;
+}

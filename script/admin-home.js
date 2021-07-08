@@ -27,14 +27,14 @@ function nav_selection_view() {
 
             var table = document.createElement("table");
             table.setAttribute("width", "100%");
-            table.setAttribute("margin","30px");
+            table.setAttribute("margin", "30px");
             table.setAttribute("border", "1");
             table.setAttribute("cellspacing", "0px");
-            table.setAttribute("cellpadding","10px");
+            table.setAttribute("cellpadding", "10px");
 
             var tr = document.createElement("tr");
             var th_sr = document.createElement("th");
-            th_sr.innerHTML = "Serial";
+            th_sr.innerHTML = "Sr.";
             tr.append(th_sr);
 
             var th_id = document.createElement("th");
@@ -58,7 +58,7 @@ function nav_selection_view() {
             for (var i = 0; i < data.length; i++) {
                 var tr = document.createElement("tr");
                 var th_sr = document.createElement("td");
-                th_sr.innerHTML = i+1;
+                th_sr.innerHTML = i + 1;
                 tr.append(th_sr);
 
                 var th_id = document.createElement("td");
@@ -70,13 +70,13 @@ function nav_selection_view() {
                 tr.append(th_email);
 
                 var th_status = document.createElement("td");
-                if(data[i].otp==0){
+                if (data[i].otp == 0) {
                     th_status.innerHTML = "Unsubscribed";
                 }
-                else if(data[i].otp==1){
+                else if (data[i].otp == 1) {
                     th_status.innerHTML = "Subscribed";
                 }
-                else{
+                else {
                     th_status.innerHTML = "Un-verified";
                 }
                 tr.append(th_status);
@@ -125,48 +125,71 @@ function nav_selection_remove() {
 
             var table = document.createElement("table");
             table.setAttribute("width", "100%");
-            table.setAttribute("margin","30px");
+            table.setAttribute("margin", "30px");
             table.setAttribute("border", "1");
             table.setAttribute("cellspacing", "0px");
-            table.setAttribute("cellpadding","10px");
+            table.setAttribute("cellpadding", "10px");
 
             var tr = document.createElement("tr");
             var th_sr = document.createElement("th");
-            th_sr.innerHTML = "Serial";
+            th_sr.innerHTML = "Sr.";
             tr.append(th_sr);
+
+            var th_id = document.createElement("th");
+            th_id.innerHTML = "User Id";
+            tr.append(th_id);
 
             var th_email = document.createElement("th");
             th_email.innerHTML = "EMAIL";
             tr.append(th_email);
 
+            var th_status = document.createElement("th");
+            th_status.innerHTML = "Status";
+            tr.append(th_status);
+
             var th_total = document.createElement("th");
             th_total.innerHTML = "Count";
             tr.append(th_total);
 
-            var th_remove = document.createElement("th");
-            th_remove.innerHTML = "Action";
-            tr.append(th_remove);
+            var th_action = document.createElement("th");
+            th_action.innerHTML = "Action";
+            tr.append(th_action);
 
             table.append(tr);
 
             for (var i = 0; i < data.length; i++) {
                 var tr = document.createElement("tr");
                 var th_sr = document.createElement("td");
-                th_sr.innerHTML = data[i].id;
+                th_sr.innerHTML = i + 1;
                 tr.append(th_sr);
+
+                var th_id = document.createElement("td");
+                th_id.innerHTML = data[i].id;
+                tr.append(th_id);
 
                 var th_email = document.createElement("td");
                 th_email.innerHTML = data[i].email;
                 tr.append(th_email);
 
+                var th_status = document.createElement("td");
+                if (data[i].otp == 0) {
+                    th_status.innerHTML = "Unsubscribed";
+                }
+                else if (data[i].otp == 1) {
+                    th_status.innerHTML = "Subscribed";
+                }
+                else {
+                    th_status.innerHTML = "Un-verified";
+                }
+                tr.append(th_status);
+
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
                 tr.append(th_total);
 
-                var th_remove = document.createElement("td");
-                th_remove.innerHTML = "Remove";
-                tr.append(th_remove);
-
+                var th_action = document.createElement("td");
+                th_action.innerHTML = "<span class='link' onclick='admin_remove_user(" + data[i].id + ")'>Remove</span>";
+                tr.append(th_action);
                 table.append(tr);
             }
             fieldset.append(table);
@@ -194,10 +217,10 @@ function nav_selection_edit() {
 
             var table = document.createElement("table");
             table.setAttribute("width", "100%");
-            table.setAttribute("margin","30px");
+            table.setAttribute("margin", "30px");
             table.setAttribute("border", "1");
             table.setAttribute("cellspacing", "0px");
-            table.setAttribute("cellpadding","10px");
+            table.setAttribute("cellpadding", "10px");
 
             var tr = document.createElement("tr");
             var th_sr = document.createElement("th");
@@ -282,7 +305,7 @@ function add_user_request(user_mail) {
                 setTimeout(
                     () => {
                         nav_selection_add()
-                    },4000);
+                    }, 4000);
             }
             else if (this.responseText.trim() == "Invalid Email") {
                 email_warn.innerHTML = "Invalid Email !";
@@ -307,4 +330,21 @@ function admin_add_user() {
     else {
         email_warn.innerHTML = "Invalid Email !";
     }
+}
+
+function admin_remove_user(id) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "./admin-remove-user.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText.trim() == "Success") {
+                nav_selection_remove();
+            }
+            else {
+                nav_selection_remove();
+            }
+        }
+    }
+    xhttp.send("id=" + id);
 }
