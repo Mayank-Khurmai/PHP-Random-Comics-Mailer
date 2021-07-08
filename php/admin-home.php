@@ -56,7 +56,7 @@
 
                 <div class="dashboard-table">
                     <div>
-                    <fieldset>
+                    <fieldset class="fieldset-50">
                             <legend>Top Users</legend>
                             <table border='1px solid black' cellspacing='0px' cellpadding='10px' width='100%'>
                                 <tr>
@@ -93,7 +93,8 @@
                         </fieldset>
                     </div>
 
-                    <div><fieldset>
+                    <div>
+                        <fieldset class="fieldset-50">
                             <legend>Recently Added Users</legend>
                             <table border='1px solid black' cellspacing='0px' cellpadding='10px' width='100%'>
                                 <tr>

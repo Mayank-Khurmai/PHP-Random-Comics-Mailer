@@ -104,7 +104,7 @@ body {
     background-color: rgb(215, 65, 82);
 }
 
-fieldset{
+.fieldset-50{
     padding-top: 10px;
     width: 50%;
 }
@@ -150,4 +150,8 @@ input[type="button"]:hover{
     -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
     -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
     box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+}
+
+#admin-add-user-warn{
+    color: red !important;
 }
