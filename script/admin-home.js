@@ -1,15 +1,72 @@
-function nav_selection_dashboard() {
+function admin_total_mails_users_active(){
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./admin-view-dashboard.php", true);
+    xhttp.open("POST", "./admin-total-mails-users-active.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            var data = JSON.parse(this.responseText);
+
+            var div = document.createElement("div");
+            div.setAttribute("class","dashboard-top");
+
+            var div_in = document.createElement("div");
+            div_in.setAttribute("class","dashboard-top-box-1");
+            var div_in_img = document.createElement("img");
+            div_in_img.setAttribute("src","https://img.icons8.com/office/100/000000/secured-letter--v4.png"); 
+            div_in.append(div_in_img);
+            var div_in_div = document.createElement("div");
+            div_in_div.innerHTML="Total Mail Sent";
+            div_in.append(div_in_div);
+            var div_in_div = document.createElement("div");
+            div_in_div.setAttribute("class","dashboard-top-title");
+            div_in_div.innerHTML = data[0].sum;
+            div_in.append(div_in_div);
+            div.append(div_in);
+
+            var div_in = document.createElement("div");
+            div_in.setAttribute("class","dashboard-top-box-2");
+            var div_in_img = document.createElement("img");
+            div_in_img.setAttribute("src","https://img.icons8.com/dusk/100/000000/conference.png"); 
+            div_in.append(div_in_img);
+            var div_in_div = document.createElement("div");
+            div_in_div.innerHTML="Total Registered Users";
+            div_in.append(div_in_div);
+            var div_in_div = document.createElement("div");
+            div_in_div.setAttribute("class","dashboard-top-title");
+            div_in_div.innerHTML = data[0].count;
+            div_in.append(div_in_div);
+            div.append(div_in);
+
+            var div_in = document.createElement("div");
+            div_in.setAttribute("class","dashboard-top-box-3");
+            var div_in_img = document.createElement("img");
+            div_in_img.setAttribute("src","https://img.icons8.com/dusk/100/000000/reading-ebook.png"); 
+            div_in.append(div_in_img);
+            var div_in_div = document.createElement("div");
+            div_in_div.innerHTML="Total Active Users";
+            div_in.append(div_in_div);
+            var div_in_div = document.createElement("div");
+            div_in_div.setAttribute("class","dashboard-top-title");
+            div_in_div.innerHTML = data[1].active;
+            div_in.append(div_in_div);
+            div.append(div_in);
+
+            var output_area = document.getElementById("right-main-output");
+            output_area.append(div);
+
         }
     }
     xhttp.send();
 }
 
+function nav_selection_dashboard() {
+    admin_total_mails_users_active();
+}
+
+
+window.onload = function() {
+    nav_selection_dashboard()
+};
 
 function nav_selection_view() {
     const xhttp = new XMLHttpRequest();
