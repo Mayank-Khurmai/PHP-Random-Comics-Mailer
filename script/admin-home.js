@@ -99,7 +99,7 @@ function nav_selection_add() {
     document.getElementById("right-main-output").innerHTML = `
         <fieldset>
         <legend>Add User Manually</legend>
-        <input type='email' id='user-email-input' style='width:50%; padding:10px'>
+        <input type='email' id='user-email-input' style='width:50%; padding:10px' placeholder='Enter user Email'>
         <br>
         <label id="admin-add-user-warn"></label>
         <br><br>
@@ -380,40 +380,12 @@ function admin_remove_user(id) {
     xhttp.send("id=" + id);
 }
 
-nav_selection_edit();
 
 function admin_edit_details(id) {
     var action = document.querySelector("[user_edit_id='" + id + "']");
     var edit_email = document.querySelector("[edit_email_id='" + id + "']");
     var edit_count = document.querySelector("[edit_count_id='" + id + "']");
     var edit_status = document.querySelector("[edit_status_id='" + id + "']");
-
-    edit_status.style.padding="0px";
-    var select = document.createElement("select");
-    select.style.width="100%";
-    select.style.height="100%";
-    select.style.margin="0px";
-    select.style.padding="10px";
-
-    var optgroup = document.createElement("optgroup");
-    optgroup.setAttribute("label","*"+edit_status.getAttribute("edit_status")+"*");
-    select.append(optgroup);
-
-    var option_1 = document.createElement("option");
-    option_1.innerHTML = "Subscribed";
-    optgroup.append(option_1);
-
-    var option_2 = document.createElement("option");
-    option_2.innerHTML = "Unsubscribed";
-    optgroup.append(option_2);
-
-    var option_3 = document.createElement("option");
-    option_3.innerHTML = "Un-verified";
-    optgroup.append(option_3);
-
-    edit_status.innerHTML="";
-    edit_status.append(select); 
-
 
     if (action.innerHTML.trim() == "Edit") {
         action.innerHTML = "Save";
@@ -427,6 +399,35 @@ function admin_edit_details(id) {
         edit_count.setAttribute("contenteditable", true);
         edit_status.setAttribute("contenteditable", true);
 
+        edit_status.style.padding = "0px";
+        var select = document.createElement("select");
+        select.setAttribute("select_option_status_id", id);
+        select.style.width = "100%";
+        select.style.height = "100%";
+        select.style.margin = "0px";
+        select.style.padding = "10px";
+
+        var optgroup = document.createElement("optgroup");
+        optgroup.setAttribute("label", "*" + edit_status.getAttribute("edit_status") + "*");
+        select.append(optgroup);
+
+        var option_1 = document.createElement("option");
+        option_1.innerHTML = "Subscribed";
+        option_1.setAttribute("value", 1);
+        optgroup.append(option_1);
+
+        var option_2 = document.createElement("option");
+        option_2.innerHTML = "Unsubscribed";
+        option_2.setAttribute("value", 0);
+        optgroup.append(option_2);
+
+        var option_3 = document.createElement("option");
+        option_3.innerHTML = "Un-verified";
+        option_3.setAttribute("value", Math.floor(100000 + Math.random() * 900000));
+        optgroup.append(option_3);
+
+        edit_status.innerHTML = "";
+        edit_status.append(select);
     }
     else {
         var flag = 0;
@@ -446,20 +447,45 @@ function admin_edit_details(id) {
         }
 
         if (flag == 2) {
+            action.innerHTML = "Wait...";
+            var final_status = document.querySelector("[select_option_status_id='" + id + "']");
+            final_status = final_status.options[final_status.selectedIndex];
+
             const xhttp = new XMLHttpRequest();
             xhttp.open("POST", "./admin-update-user-details.php", true);
             xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhttp.onload = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.responseText.trim() == "Success") {
-                        nav_selection_edit();
+                        action.innerHTML = "Success";
+                        edit_status.style.padding = "";
+                        edit_status.innerHTML = final_status.innerHTML;
+                        edit_status.setAttribute("edit_status",final_status.innerHTML);
+
+                        edit_email.style.border = "";
+                        edit_count.style.border = "";
+                        edit_status.style.border = "";
+
+                        edit_email.setAttribute("contenteditable", false);
+                        edit_count.setAttribute("contenteditable", false);
+                        edit_status.setAttribute("contenteditable", false);
+
+                        setTimeout(
+                            () => {
+                                action.innerHTML = "Edit";
+                                action.style.color = "red";
+                            }, 2000);
                     }
                     else {
-                        nav_selection_edit();
+                        action.innerHTML = "Failed";
+                        setTimeout(
+                            () => {
+                                action.innerHTML = "Save";
+                            }, 2000);
                     }
                 }
             }
-            xhttp.send("id=" + id + "email=" + edit_email.innerHTML + "count=" + edit_count.innerHTML + "status=" + edit_status.innerHTML);
+            xhttp.send("id=" + id + "&email=" + edit_email.innerHTML + "&count=" + edit_count.innerHTML + "&status=" + final_status.value);
         }
     }
 }
