@@ -273,12 +273,15 @@ function nav_selection_edit() {
                 var th_status = document.createElement("td");
                 if (data[i].otp == 0) {
                     th_status.innerHTML = "Unsubscribed";
+                    th_status.setAttribute("edit_status", "Unsubscribed");
                 }
                 else if (data[i].otp == 1) {
                     th_status.innerHTML = "Subscribed";
+                    th_status.setAttribute("edit_status", "Subscribed");
                 }
                 else {
                     th_status.innerHTML = "Un-verified";
+                    th_status.setAttribute("edit_status", "Un-verified");
                 }
                 th_status.setAttribute("edit_status_id", data[i].id);
                 tr.append(th_status);
@@ -384,6 +387,34 @@ function admin_edit_details(id) {
     var edit_email = document.querySelector("[edit_email_id='" + id + "']");
     var edit_count = document.querySelector("[edit_count_id='" + id + "']");
     var edit_status = document.querySelector("[edit_status_id='" + id + "']");
+
+    edit_status.style.padding="0px";
+    var select = document.createElement("select");
+    select.style.width="100%";
+    select.style.height="100%";
+    select.style.margin="0px";
+    select.style.padding="10px";
+
+    var optgroup = document.createElement("optgroup");
+    optgroup.setAttribute("label","*"+edit_status.getAttribute("edit_status")+"*");
+    select.append(optgroup);
+
+    var option_1 = document.createElement("option");
+    option_1.innerHTML = "Subscribed";
+    optgroup.append(option_1);
+
+    var option_2 = document.createElement("option");
+    option_2.innerHTML = "Unsubscribed";
+    optgroup.append(option_2);
+
+    var option_3 = document.createElement("option");
+    option_3.innerHTML = "Un-verified";
+    optgroup.append(option_3);
+
+    edit_status.innerHTML="";
+    edit_status.append(select); 
+
+
     if (action.innerHTML.trim() == "Edit") {
         action.innerHTML = "Save";
         action.style.color = "green";
@@ -413,25 +444,18 @@ function admin_edit_details(id) {
         else {
             edit_count.style.border = "2px dashed red";
         }
-        if (edit_status.innerHTML != "") {
-            edit_status.style.border = "2px solid red";
-            flag += 1;
-        }
-        else {
-            edit_status.style.border = "2px dashed red";
-        }
 
-        if (flag == 3) {
+        if (flag == 2) {
             const xhttp = new XMLHttpRequest();
             xhttp.open("POST", "./admin-update-user-details.php", true);
             xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhttp.onload = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.responseText.trim() == "Success") {
-                        nav_selection_remove();
+                        nav_selection_edit();
                     }
                     else {
-                        nav_selection_remove();
+                        nav_selection_edit();
                     }
                 }
             }
