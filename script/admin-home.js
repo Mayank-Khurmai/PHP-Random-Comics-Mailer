@@ -1,4 +1,4 @@
-function admin_total_mails_users_active(){
+function admin_total_mails_users_active() {
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./admin-total-mails-users-active.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -7,64 +7,139 @@ function admin_total_mails_users_active(){
             var data = JSON.parse(this.responseText);
 
             var div = document.createElement("div");
-            div.setAttribute("class","dashboard-top");
+            div.setAttribute("class", "dashboard-top");
 
             var div_in = document.createElement("div");
-            div_in.setAttribute("class","dashboard-top-box-1");
+            div_in.setAttribute("class", "dashboard-top-box-1");
             var div_in_img = document.createElement("img");
-            div_in_img.setAttribute("src","https://img.icons8.com/office/100/000000/secured-letter--v4.png"); 
+            div_in_img.setAttribute("src", "https://img.icons8.com/office/100/000000/secured-letter--v4.png");
             div_in.append(div_in_img);
             var div_in_div = document.createElement("div");
-            div_in_div.innerHTML="Total Mail Sent";
+            div_in_div.innerHTML = "Total Mail Sent";
             div_in.append(div_in_div);
             var div_in_div = document.createElement("div");
-            div_in_div.setAttribute("class","dashboard-top-title");
+            div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[0].sum;
             div_in.append(div_in_div);
             div.append(div_in);
 
             var div_in = document.createElement("div");
-            div_in.setAttribute("class","dashboard-top-box-2");
+            div_in.setAttribute("class", "dashboard-top-box-2");
             var div_in_img = document.createElement("img");
-            div_in_img.setAttribute("src","https://img.icons8.com/dusk/100/000000/conference.png"); 
+            div_in_img.setAttribute("src", "https://img.icons8.com/dusk/100/000000/conference.png");
             div_in.append(div_in_img);
             var div_in_div = document.createElement("div");
-            div_in_div.innerHTML="Total Registered Users";
+            div_in_div.innerHTML = "Total Registered Users";
             div_in.append(div_in_div);
             var div_in_div = document.createElement("div");
-            div_in_div.setAttribute("class","dashboard-top-title");
+            div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[0].count;
             div_in.append(div_in_div);
             div.append(div_in);
 
             var div_in = document.createElement("div");
-            div_in.setAttribute("class","dashboard-top-box-3");
+            div_in.setAttribute("class", "dashboard-top-box-3");
             var div_in_img = document.createElement("img");
-            div_in_img.setAttribute("src","https://img.icons8.com/dusk/100/000000/reading-ebook.png"); 
+            div_in_img.setAttribute("src", "https://img.icons8.com/dusk/100/000000/reading-ebook.png");
             div_in.append(div_in_img);
             var div_in_div = document.createElement("div");
-            div_in_div.innerHTML="Total Active Users";
+            div_in_div.innerHTML = "Total Active Users";
             div_in.append(div_in_div);
             var div_in_div = document.createElement("div");
-            div_in_div.setAttribute("class","dashboard-top-title");
+            div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[1].active;
             div_in.append(div_in_div);
             div.append(div_in);
 
             var output_area = document.getElementById("right-main-output");
             output_area.append(div);
+        }
+    }
+    xhttp.send();
+}
 
+function admin_top_recently_users() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "./admin_top_recently_users.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            console.log(data);
+            var output_area = document.getElementById("right-main-output");
+            var dash_table_div = document.createElement("div");
+            var legend_array = ["Top Users", "Recently Added Users"];
+
+            for (var i = 0; i < data.length; i++) {
+                dash_table_div.setAttribute("class", "dashboard-table");
+
+                var dash_table_div_in = document.createElement("div");
+                var fieldset = document.createElement("fieldset");
+                fieldset.setAttribute("class", "fieldset-50");
+
+                var legend = document.createElement("legend");
+                legend.innerHTML = legend_array[i];
+                fieldset.append(legend);
+
+                var table = document.createElement("table");
+                table.setAttribute("border", "1px solid black");
+                table.setAttribute("cellspacing", "0px");
+                table.setAttribute("cellpadding", "10px");
+                table.setAttribute("width", "100%");
+
+                var tr = document.createElement("tr");
+                var th_sr = document.createElement("th");
+                th_sr.setAttribute("class", "text-center");
+                th_sr.innerHTML = "Sr.";
+                tr.append(th_sr);
+
+                var th_email = document.createElement("th");
+                th_email.innerHTML = "Email";
+                tr.append(th_email);
+
+                var th_total = document.createElement("th");
+                th_total.setAttribute("class", "text-center");
+                th_total.innerHTML = "Count";
+                tr.append(th_total);
+                table.append(tr);
+
+                for (var j = 0; j < data[0].length; j++) {
+                    var tr = document.createElement("tr");
+                    var th_sr = document.createElement("th");
+                    th_sr.setAttribute("class", "text-center");
+                    th_sr.innerHTML = j + 1;
+                    tr.append(th_sr);
+
+                    var td_email = document.createElement("td");
+                    td_email.innerHTML = data[i][j].email;
+                    tr.append(td_email);
+
+                    var th_total = document.createElement("th");
+                    th_total.setAttribute("class", "text-center");
+                    th_total.innerHTML = data[i][j].count;
+                    tr.append(th_total);
+                    table.append(tr);
+                }
+
+
+                fieldset.append(table);
+                dash_table_div_in.append(fieldset);
+                dash_table_div.append(dash_table_div_in);
+            }
+            output_area.append(dash_table_div);
         }
     }
     xhttp.send();
 }
 
 function nav_selection_dashboard() {
+    document.getElementById("right-main-output").innerHTML = "";
     admin_total_mails_users_active();
+    admin_top_recently_users();
 }
 
 
-window.onload = function() {
+window.onload = function () {
     nav_selection_dashboard()
 };
 
@@ -517,7 +592,7 @@ function admin_edit_details(id) {
                         action.innerHTML = "Success";
                         edit_status.style.padding = "";
                         edit_status.innerHTML = final_status.innerHTML;
-                        edit_status.setAttribute("edit_status",final_status.innerHTML);
+                        edit_status.setAttribute("edit_status", final_status.innerHTML);
 
                         edit_email.style.border = "";
                         edit_count.style.border = "";
