@@ -21,7 +21,7 @@ function admin_total_mails_users_active() {
             div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[0].sum;
             div_in1.append(div_in_div);
-            div_in1.style.float="left";
+            div_in1.style.float = "left";
             dashboard_top_div.append(div_in1);
 
             var div_in2 = document.createElement("div");
@@ -36,7 +36,7 @@ function admin_total_mails_users_active() {
             div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[0].count;
             div_in2.append(div_in_div);
-            div_in2.style.float="left";
+            div_in2.style.float = "left";
             dashboard_top_div.append(div_in2);
 
             var div_in3 = document.createElement("div");
@@ -51,11 +51,13 @@ function admin_total_mails_users_active() {
             div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[1].active;
             div_in3.append(div_in_div);
-            div_in3.style.float="left";
+            div_in3.style.float = "left";
             dashboard_top_div.append(div_in3);
 
             var output_area = document.getElementById("right-main-output");
             output_area.append(dashboard_top_div);
+
+            admin_top_recently_users();
         }
     }
     xhttp.send();
@@ -71,13 +73,13 @@ function admin_top_recently_users() {
             var output_area = document.getElementById("right-main-output");
             var dash_table_div = document.createElement("div");
             var d_array = [
-                {"legend":"Top Users","th":"Total"},
-                {"legend":"Recently Added Users","th":"Date"}
+                { "legend": "Top Users", "th": "Total" },
+                { "legend": "Recently Added Users", "th": "Date" }
             ];
 
             for (var i = 0; i < data.length; i++) {
                 var dash_table_div_in = document.createElement("div");
-                dash_table_div_in.setAttribute("class","dash_table_div_in");
+                dash_table_div_in.setAttribute("class", "dash_table_div_in");
                 var fieldset = document.createElement("fieldset");
                 fieldset.setAttribute("class", "fieldset-50");
 
@@ -121,9 +123,9 @@ function admin_top_recently_users() {
                     var th_total = document.createElement("td");
                     th_total.setAttribute("class", "text-center");
                     var temp;
-                    if(i==0){temp=data[i][j].count}
-                    else{temp=data[i][j].date}
-                    th_total.innerHTML = temp;  
+                    if (i == 0) { temp = data[i][j].count }
+                    else { temp = data[i][j].date }
+                    th_total.innerHTML = temp;
                     tr.append(th_total);
                     table.append(tr);
                 }
@@ -133,9 +135,9 @@ function admin_top_recently_users() {
                 dash_table_div_in.append(fieldset);
                 dash_table_div.append(dash_table_div_in);
             }
-            
+
             dash_table_div.setAttribute("class", "dashboard-table");
-            dash_table_div.style.float="left";
+            dash_table_div.style.float = "left";
             output_area.append(dash_table_div);
         }
     }
@@ -143,9 +145,10 @@ function admin_top_recently_users() {
 }
 
 function nav_selection_dashboard() {
+    document.querySelector(".sm-li").removeAttribute("class");
+    document.querySelector("#sm-li-1").setAttribute("class", "sm-li active");
     document.getElementById("right-main-output").innerHTML = "";
     admin_total_mails_users_active();
-    admin_top_recently_users();
 }
 
 
@@ -153,7 +156,10 @@ window.onload = function () {
     nav_selection_dashboard()
 };
 
-function nav_selection_view() {
+function nav_selection_view(e) {
+    document.querySelector(".sm-li").removeAttribute("class");
+    document.querySelector("#sm-li-2").setAttribute("class", "sm-li active");
+
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./admin-view-users.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -205,7 +211,7 @@ function nav_selection_view() {
 
                 var th_id = document.createElement("td");
                 th_id.innerHTML = data[i].id;
-                th_id.setAttribute("class","text-center");
+                th_id.setAttribute("class", "text-center");
                 tr.append(th_id);
 
                 var th_email = document.createElement("td");
@@ -214,7 +220,7 @@ function nav_selection_view() {
 
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
-                th_total.setAttribute("class","text-center");
+                th_total.setAttribute("class", "text-center");
                 tr.append(th_total);
 
                 var th_status = document.createElement("td");
@@ -240,6 +246,8 @@ function nav_selection_view() {
 
 
 function nav_selection_add() {
+    document.querySelector(".sm-li").removeAttribute("class");
+    document.querySelector("#sm-li-3").setAttribute("class", "sm-li active");
     document.getElementById("right-main-output").innerHTML = `
         <fieldset>
         <legend>Add User Manually</legend>
@@ -254,6 +262,8 @@ function nav_selection_add() {
 
 
 function nav_selection_remove() {
+    document.querySelector(".sm-li").removeAttribute("class");
+    document.querySelector("#sm-li-4").setAttribute("class", "sm-li active");
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./admin-view-users.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -309,7 +319,7 @@ function nav_selection_remove() {
 
                 var th_id = document.createElement("td");
                 th_id.innerHTML = data[i].id;
-                th_id.setAttribute("class","text-center");
+                th_id.setAttribute("class", "text-center");
                 tr.append(th_id);
 
                 var th_email = document.createElement("td");
@@ -318,7 +328,7 @@ function nav_selection_remove() {
 
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
-                th_total.setAttribute("class","text-center");
+                th_total.setAttribute("class", "text-center");
                 tr.append(th_total);
 
                 var th_status = document.createElement("td");
@@ -335,7 +345,7 @@ function nav_selection_remove() {
 
                 var th_action = document.createElement("td");
                 th_action.innerHTML = "<span class='link' onclick='admin_remove_user(" + data[i].id + ")'>Remove</span>";
-                th_action.setAttribute("class","text-center");
+                th_action.setAttribute("class", "text-center");
                 tr.append(th_action);
                 table.append(tr);
             }
@@ -349,6 +359,8 @@ function nav_selection_remove() {
 
 
 function nav_selection_edit() {
+    document.querySelector(".sm-li").removeAttribute("class");
+    document.querySelector("#sm-li-5").setAttribute("class", "sm-li active");
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "./admin-view-users.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -405,7 +417,7 @@ function nav_selection_edit() {
 
                 var th_id = document.createElement("td");
                 th_id.innerHTML = data[i].id;
-                th_id.setAttribute("class","text-center");
+                th_id.setAttribute("class", "text-center");
                 tr.append(th_id);
 
                 var th_email = document.createElement("td");
@@ -416,7 +428,7 @@ function nav_selection_edit() {
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
                 th_total.setAttribute("edit_count_id", data[i].id);
-                th_total.setAttribute("class","text-center");
+                th_total.setAttribute("class", "text-center");
                 tr.append(th_total);
 
                 var th_status = document.createElement("td");
@@ -437,7 +449,7 @@ function nav_selection_edit() {
 
                 var th_edit = document.createElement("td");
                 th_edit.innerHTML = "<span class='link' user_edit_id='" + data[i].id + "' onclick='admin_edit_details(" + data[i].id + ")'>Edit</span>";
-                th_edit.setAttribute("class","text-center");
+                th_edit.setAttribute("class", "text-center");
                 tr.append(th_edit);
 
                 table.append(tr);
@@ -451,7 +463,9 @@ function nav_selection_edit() {
 }
 
 function nav_selection_logout() {
-    alert("Log out");
+    document.querySelector(".sm-li").removeAttribute("class");
+    document.querySelector("#sm-li-6").setAttribute("class", "sm-li active");
+    document.getElementById("right-main-output").innerHTML = "Log out";
 }
 
 

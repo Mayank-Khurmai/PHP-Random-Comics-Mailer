@@ -66,7 +66,7 @@ body {
 
 #right-main-div-header{
     width: 100%;
-    height: 50px;
+    height: 6vh;
     color: white;
     background-color: rgb(156, 157, 160);
 }
@@ -79,7 +79,9 @@ body {
 
 #right-main-output{
     padding: 10px;
-    overflow-y: auto !important;
+    padding-bottom: 0%;
+    height: 94vh;
+    overflow-y: scroll !important;
 }
 
 
@@ -202,4 +204,14 @@ input[type="button"]:hover{
     #side-menu-nav{
         width: 10%;
     }
+
+    #right-main-div{
+        width: 90%;
   }
+}
+
+  @media screen and (max-width: 560px) {
+    .side-menu-logo > img{
+        width: 40px;
+    }
+}
