@@ -13,17 +13,17 @@
 
         <div id="side-menu-nav">
             <div class="side-menu-logo">
-                <img src="https://avatars.githubusercontent.com/u/65281650?s=200&v=4" height="120px">
+                <img src="https://avatars.githubusercontent.com/u/65281650?s=200&v=4">
             </div>
             <hr width="70%">
             <div>
                 <ul id="side-menu-nav-ul">
-                    <li class="active" onclick="nav_selection_dashboard()"><img src="https://img.icons8.com/ios-filled/20/000000/dashboard.png"/> Dashboard</li>
-                    <li onclick="nav_selection_view()"><img src="https://img.icons8.com/ios-glyphs/20/000000/user.png"/> View Users</li>
-                    <li onclick="nav_selection_add()"><img src="https://img.icons8.com/ios-filled/20/000000/add--v1.png"/> Add User</li>
-                    <li onclick="nav_selection_remove()"><img src="https://img.icons8.com/ios-glyphs/20/000000/minus.png"/> Remove User</li>
-                    <li onclick="nav_selection_edit()"><img src="https://img.icons8.com/material-sharp/20/000000/edit--v1.png"/> Edit User</li>
-                    <li onclick="nav_selection_logout()"><img src="https://img.icons8.com/ios-filled/20/000000/logout-rounded-up.png"/> Logout</li>
+                    <li class="active" onclick="nav_selection_dashboard()"><img src="https://img.icons8.com/ios-filled/20/000000/dashboard.png"/> <span class="nav-menu-desc">Dashboard</span></li>
+                    <li onclick="nav_selection_view()"><img src="https://img.icons8.com/ios-glyphs/20/000000/user.png"/> <span class="nav-menu-desc">View Users</span></li>
+                    <li onclick="nav_selection_add()"><img src="https://img.icons8.com/ios-filled/20/000000/add--v1.png"/> <span class="nav-menu-desc">Add User</span></li>
+                    <li onclick="nav_selection_remove()"><img src="https://img.icons8.com/ios-glyphs/20/000000/minus.png"/> <span class="nav-menu-desc">Remove User</span></li>
+                    <li onclick="nav_selection_edit()"><img src="https://img.icons8.com/material-sharp/20/000000/edit--v1.png"/> <span class="nav-menu-desc">Edit User</span></li>
+                    <li onclick="nav_selection_logout()"><img src="https://img.icons8.com/ios-filled/20/000000/logout-rounded-up.png"/> <span class="nav-menu-desc">Logout</span></li>
                 </ul>
             </div>
         </div>

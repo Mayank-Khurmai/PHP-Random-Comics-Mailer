@@ -21,7 +21,7 @@ class main
                 array_push($this->top_users,$this->data);
             }
             array_push($this->all_data,$this->top_users);
-            $this->query = "SELECT * FROM user_data ORDER BY id DESC LIMIT 5";
+            $this->query = "SELECT * FROM user_data ORDER BY date DESC LIMIT 5";
             $this->response = $this->db->query($this->query);
             if ($this->response->num_rows != 0) {
                 while($this->data = $this->response->fetch_assoc()){

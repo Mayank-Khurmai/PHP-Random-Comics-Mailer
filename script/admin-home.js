@@ -6,53 +6,56 @@ function admin_total_mails_users_active() {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
 
-            var div = document.createElement("div");
-            div.setAttribute("class", "dashboard-top");
+            var dashboard_top_div = document.createElement("div");
+            dashboard_top_div.setAttribute("class", "dashboard-top-div");
 
-            var div_in = document.createElement("div");
-            div_in.setAttribute("class", "dashboard-top-box-1");
+            var div_in1 = document.createElement("div");
+            div_in1.setAttribute("class", "dashboard-top-box-1 dashboard-top-3");
             var div_in_img = document.createElement("img");
             div_in_img.setAttribute("src", "https://img.icons8.com/office/100/000000/secured-letter--v4.png");
-            div_in.append(div_in_img);
+            div_in1.append(div_in_img);
             var div_in_div = document.createElement("div");
             div_in_div.innerHTML = "Total Mail Sent";
-            div_in.append(div_in_div);
+            div_in1.append(div_in_div);
             var div_in_div = document.createElement("div");
             div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[0].sum;
-            div_in.append(div_in_div);
-            div.append(div_in);
+            div_in1.append(div_in_div);
+            div_in1.style.float="left";
+            dashboard_top_div.append(div_in1);
 
-            var div_in = document.createElement("div");
-            div_in.setAttribute("class", "dashboard-top-box-2");
+            var div_in2 = document.createElement("div");
+            div_in2.setAttribute("class", "dashboard-top-box-2 dashboard-top-3");
             var div_in_img = document.createElement("img");
             div_in_img.setAttribute("src", "https://img.icons8.com/dusk/100/000000/conference.png");
-            div_in.append(div_in_img);
+            div_in2.append(div_in_img);
             var div_in_div = document.createElement("div");
             div_in_div.innerHTML = "Total Registered Users";
-            div_in.append(div_in_div);
+            div_in2.append(div_in_div);
             var div_in_div = document.createElement("div");
             div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[0].count;
-            div_in.append(div_in_div);
-            div.append(div_in);
+            div_in2.append(div_in_div);
+            div_in2.style.float="left";
+            dashboard_top_div.append(div_in2);
 
-            var div_in = document.createElement("div");
-            div_in.setAttribute("class", "dashboard-top-box-3");
+            var div_in3 = document.createElement("div");
+            div_in3.setAttribute("class", "dashboard-top-box-3 dashboard-top-3");
             var div_in_img = document.createElement("img");
             div_in_img.setAttribute("src", "https://img.icons8.com/dusk/100/000000/reading-ebook.png");
-            div_in.append(div_in_img);
+            div_in3.append(div_in_img);
             var div_in_div = document.createElement("div");
             div_in_div.innerHTML = "Total Active Users";
-            div_in.append(div_in_div);
+            div_in3.append(div_in_div);
             var div_in_div = document.createElement("div");
             div_in_div.setAttribute("class", "dashboard-top-title");
             div_in_div.innerHTML = data[1].active;
-            div_in.append(div_in_div);
-            div.append(div_in);
+            div_in3.append(div_in_div);
+            div_in3.style.float="left";
+            dashboard_top_div.append(div_in3);
 
             var output_area = document.getElementById("right-main-output");
-            output_area.append(div);
+            output_area.append(dashboard_top_div);
         }
     }
     xhttp.send();
@@ -65,20 +68,21 @@ function admin_top_recently_users() {
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
-            console.log(data);
             var output_area = document.getElementById("right-main-output");
             var dash_table_div = document.createElement("div");
-            var legend_array = ["Top Users", "Recently Added Users"];
+            var d_array = [
+                {"legend":"Top Users","th":"Total"},
+                {"legend":"Recently Added Users","th":"Date"}
+            ];
 
             for (var i = 0; i < data.length; i++) {
-                dash_table_div.setAttribute("class", "dashboard-table");
-
                 var dash_table_div_in = document.createElement("div");
+                dash_table_div_in.setAttribute("class","dash_table_div_in");
                 var fieldset = document.createElement("fieldset");
                 fieldset.setAttribute("class", "fieldset-50");
 
                 var legend = document.createElement("legend");
-                legend.innerHTML = legend_array[i];
+                legend.innerHTML = d_array[i].legend;
                 fieldset.append(legend);
 
                 var table = document.createElement("table");
@@ -99,7 +103,7 @@ function admin_top_recently_users() {
 
                 var th_total = document.createElement("th");
                 th_total.setAttribute("class", "text-center");
-                th_total.innerHTML = "Count";
+                th_total.innerHTML = d_array[i].th;
                 tr.append(th_total);
                 table.append(tr);
 
@@ -114,9 +118,12 @@ function admin_top_recently_users() {
                     td_email.innerHTML = data[i][j].email;
                     tr.append(td_email);
 
-                    var th_total = document.createElement("th");
+                    var th_total = document.createElement("td");
                     th_total.setAttribute("class", "text-center");
-                    th_total.innerHTML = data[i][j].count;
+                    var temp;
+                    if(i==0){temp=data[i][j].count}
+                    else{temp=data[i][j].date}
+                    th_total.innerHTML = temp;  
                     tr.append(th_total);
                     table.append(tr);
                 }
@@ -126,6 +133,9 @@ function admin_top_recently_users() {
                 dash_table_div_in.append(fieldset);
                 dash_table_div.append(dash_table_div_in);
             }
+            
+            dash_table_div.setAttribute("class", "dashboard-table");
+            dash_table_div.style.float="left";
             output_area.append(dash_table_div);
         }
     }
