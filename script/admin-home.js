@@ -199,12 +199,13 @@ function nav_selection_view() {
 
             for (var i = 0; i < data.length; i++) {
                 var tr = document.createElement("tr");
-                var th_sr = document.createElement("td");
+                var th_sr = document.createElement("th");
                 th_sr.innerHTML = i + 1;
                 tr.append(th_sr);
 
                 var th_id = document.createElement("td");
                 th_id.innerHTML = data[i].id;
+                th_id.setAttribute("class","text-center");
                 tr.append(th_id);
 
                 var th_email = document.createElement("td");
@@ -213,6 +214,7 @@ function nav_selection_view() {
 
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
+                th_total.setAttribute("class","text-center");
                 tr.append(th_total);
 
                 var th_status = document.createElement("td");
@@ -301,12 +303,13 @@ function nav_selection_remove() {
 
             for (var i = 0; i < data.length; i++) {
                 var tr = document.createElement("tr");
-                var th_sr = document.createElement("td");
+                var th_sr = document.createElement("th");
                 th_sr.innerHTML = i + 1;
                 tr.append(th_sr);
 
                 var th_id = document.createElement("td");
                 th_id.innerHTML = data[i].id;
+                th_id.setAttribute("class","text-center");
                 tr.append(th_id);
 
                 var th_email = document.createElement("td");
@@ -315,6 +318,7 @@ function nav_selection_remove() {
 
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
+                th_total.setAttribute("class","text-center");
                 tr.append(th_total);
 
                 var th_status = document.createElement("td");
@@ -331,6 +335,7 @@ function nav_selection_remove() {
 
                 var th_action = document.createElement("td");
                 th_action.innerHTML = "<span class='link' onclick='admin_remove_user(" + data[i].id + ")'>Remove</span>";
+                th_action.setAttribute("class","text-center");
                 tr.append(th_action);
                 table.append(tr);
             }
@@ -394,12 +399,13 @@ function nav_selection_edit() {
 
             for (var i = 0; i < data.length; i++) {
                 var tr = document.createElement("tr");
-                var th_sr = document.createElement("td");
+                var th_sr = document.createElement("th");
                 th_sr.innerHTML = i + 1;
                 tr.append(th_sr);
 
                 var th_id = document.createElement("td");
                 th_id.innerHTML = data[i].id;
+                th_id.setAttribute("class","text-center");
                 tr.append(th_id);
 
                 var th_email = document.createElement("td");
@@ -410,6 +416,7 @@ function nav_selection_edit() {
                 var th_total = document.createElement("td");
                 th_total.innerHTML = data[i].count;
                 th_total.setAttribute("edit_count_id", data[i].id);
+                th_total.setAttribute("class","text-center");
                 tr.append(th_total);
 
                 var th_status = document.createElement("td");
@@ -429,7 +436,8 @@ function nav_selection_edit() {
                 tr.append(th_status);
 
                 var th_edit = document.createElement("td");
-                th_edit.innerHTML = "<span class='link' user_edit_id='" + data[i].id + "' onclick='admin_edit_details(" + data[i].id + ")'>Edit</span>";;
+                th_edit.innerHTML = "<span class='link' user_edit_id='" + data[i].id + "' onclick='admin_edit_details(" + data[i].id + ")'>Edit</span>";
+                th_edit.setAttribute("class","text-center");
                 tr.append(th_edit);
 
                 table.append(tr);
