@@ -5,7 +5,7 @@
     <title>XKCD Challenge</title>
     <link rel="icon" href="https://avatars.githubusercontent.com/u/65281650?s=200&v=4" type="image/icon type">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="./users/style/main.css">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
             <div>
                 <span>Congratulations! your Email has been successfully verified.</span>
             </div>
-            <a href="./php/unsubscribe.php">Click to Unsubscribe</a>
+            <a href="./users/php/unsubscribe.php">Click to Unsubscribe</a>
         </div>
 
 
@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <script src="./script/subscribe.js"></script>
+    <script src="./users/script/subscribe.js"></script>
 
 </body>
 

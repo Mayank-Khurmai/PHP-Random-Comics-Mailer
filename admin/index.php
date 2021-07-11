@@ -5,43 +5,53 @@
     <title>XKCD Challenge</title>
     <link rel="icon" href="https://avatars.githubusercontent.com/u/65281650?s=200&v=4" type="image/icon type">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/admin-home.css">
+    <link rel="stylesheet" href="./style/admin-login.css">
 </head>
 
 <body>
-    <div class="body-container">
 
-        <div id="side-menu-nav">
-            <div class="side-menu-logo">
-                <img src="https://avatars.githubusercontent.com/u/65281650?s=200&v=4">
-            </div>
-            <hr width="70%">
-            <div>
-                <ul id="side-menu-nav-ul">
-                    <li title="Dashboard" class="sm-li active" id="sm-li-1" onclick="nav_selection_dashboard()"><img src="https://img.icons8.com/ios-filled/20/000000/dashboard.png" /> <span class="nav-menu-desc">Dashboard</span></li>
-                    <li title="View Users" class="sm-li" id="sm-li-2" onclick="nav_selection_view()"><img src="https://img.icons8.com/ios-glyphs/20/000000/user.png"/> <span class="nav-menu-desc">View Users</span></li>
-                    <li title="Add User" class="sm-li" id="sm-li-3" onclick="nav_selection_add()"><img src="https://img.icons8.com/ios-filled/20/000000/add--v1.png"/> <span class="nav-menu-desc">Add User</span></li>
-                    <li title="Remove User" class="sm-li" id="sm-li-4" onclick="nav_selection_remove()"><img src="https://img.icons8.com/ios-glyphs/20/000000/minus.png"/> <span class="nav-menu-desc">Remove User</span></li>
-                    <li title="Edit User" class="sm-li" id="sm-li-5" onclick="nav_selection_edit()"><img src="https://img.icons8.com/material-sharp/20/000000/edit--v1.png"/> <span class="nav-menu-desc">Edit User</span></li>
-                    <li title="Logout" class="sm-li" id="sm-li-6" onclick="nav_selection_logout()"><img src="https://img.icons8.com/ios-filled/20/000000/logout-rounded-up.png"/> <span class="nav-menu-desc">Logout</span></li>
-                </ul>
-            </div>
-        </div>
 
-        <div id="right-main-div">
-            <div id="right-main-div-header">
-                <div>
-                    Hi, Admin
-                </div>
-            </div>
-            <div id="right-main-output">
 
-            </div>
-        </div>
+<div class="form-style">
+
+<div id="tick-icon-div">
+    <img src="https://img.icons8.com/color/96/000000/approval--v3.gif" />
+    <div>
+        <span>Congratulations! your Email has been successfully verified.</span>
     </div>
+    <a href="">Click to Unsubscribe</a>
+</div>
 
 
-    <script src="../script/admin-home.js"></script>
+<div id="form-style-div">
+    <h1>Sign Up Now!<span>Sign up to get random XKCD comics every five minutes!</span></h1>
+    <form>
+
+        <div id="step-1">
+            <div class="section"><span>1</span>Enter your Email Address</div>
+            <div class="inner-wrap">
+                <label>Email Address <input type="email" name="user_mail" id="user_mail" value="mayankkhurmai8@gmail.com" /></label>
+                <label>Password <input type="password" name="user_mail" id="user_pass" value="123456" /></label>
+                <label id="credential-warn"></label>
+            </div>
+        </div>
+
+        <div id="step-2">
+            <div class="section"><span>2</span>Enter OTP</div>
+            <div class="inner-wrap">
+                <label>Enter OTP sent to your Email <input type="number" name="otp" id="otp" value="123456" /></label>
+                <label id="otp-warn"></label>
+            </div>
+        </div>
+
+        <div class="button-section">
+            <input type="button" value="Send OTP" onclick="send_otp();" flag="step-1" id="s-otp-button" />
+        </div>
+
+    </form>
+</div>
+</div>
+    <script src="./script/admin-login.js"></script>
 
 </body>
 
