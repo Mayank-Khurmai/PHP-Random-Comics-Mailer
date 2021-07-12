@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+if(!isset($_SESSION['xkcd_admin']))
+{
+    header("Location: http://localhost/php-Mayank-Khurmai/admin/");
+    exit();
+}
+
+
 require_once "./database-connection.php";
 
 class main

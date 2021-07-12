@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+if(!isset($_SESSION['xkcd_admin']))
+{
+    header("Location: http://localhost/php-Mayank-Khurmai/admin/");
+    exit();
+}
+
 require_once "./database-connection.php";
 
 class main
@@ -47,7 +54,7 @@ class main
             if(strtotime($this->c_date) - strtotime($this->m_date)<120){
                 echo "OTP Verified";   
                 session_start();
-				$_SESSION['admin'] = $this->admin_hash_otp;
+				$_SESSION['xkcd_admin'] = $this->admin_hash_otp;
                 $this->db->close();
                 header("Location: http://localhost/php-Mayank-Khurmai/admin/php/admin-home.php");
                 exit();

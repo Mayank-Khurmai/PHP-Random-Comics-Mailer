@@ -21,8 +21,8 @@
         <div id="step-1">
             <div class="section"><span>1</span>Enter Login Credentials</div>
             <div class="inner-wrap">
-                <label>Email Address <input type="email" name="admin_mail" id="admin_mail" placeholder="Eg- abc@xkcd.com"/></label>
-                <label>Password <input type="password" name="admin_mail" id="admin_pass" placeholder="********" /></label>
+                <label>Email Address <input type="email" name="admin_mail" id="admin_mail" placeholder="Eg- abc@xkcd.com" autocomplete="off" /></label>
+                <label>Password <input type="password" name="admin_mail" id="admin_pass" placeholder="********" autocomplete="off" /></label>
                 <label id="credential-warn"></label>
             </div>
         </div>
@@ -30,7 +30,7 @@
         <div id="step-2">
             <div class="section"><span>2</span>Enter OTP</div>
             <div class="inner-wrap">
-                <label>Enter OTP sent to your Email <input type="number" name="otp" id="otp" value="123456" /></label>
+                <label>Enter OTP sent to your Email <input type="number" name="otp" id="otp" value="123456" autocomplete="off" /></label>
                 <label id="otp-warn"></label>
             </div>
         </div>

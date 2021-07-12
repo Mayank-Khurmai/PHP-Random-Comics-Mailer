@@ -65,7 +65,7 @@ function admin_total_mails_users_active() {
 
 function admin_top_recently_users() {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./admin_top_recently_users.php", true);
+    xhttp.open("POST", "./admin-top-recently-users.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -465,7 +465,8 @@ function nav_selection_edit() {
 function nav_selection_logout() {
     document.querySelector(".sm-li").removeAttribute("class");
     document.querySelector("#sm-li-6").setAttribute("class", "sm-li active");
-    document.getElementById("right-main-output").innerHTML = "Log out";
+    document.getElementById("right-main-output").innerHTML = "Logging you out......";
+    location.href = "./admin-logout.php";
 }
 
 
