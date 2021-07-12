@@ -30,8 +30,8 @@
         <div id="step-1">
             <div class="section"><span>1</span>Enter your Email Address</div>
             <div class="inner-wrap">
-                <label>Email Address <input type="email" name="user_mail" id="user_mail" value="mayankkhurmai8@gmail.com" /></label>
-                <label>Password <input type="password" name="user_mail" id="user_pass" value="123456" /></label>
+                <label>Email Address <input type="email" name="admin_mail" id="admin_mail" value="mayankkhurmai8@gmail.com" /></label>
+                <label>Password <input type="password" name="admin_mail" id="admin_pass" value="123456" /></label>
                 <label id="credential-warn"></label>
             </div>
         </div>
