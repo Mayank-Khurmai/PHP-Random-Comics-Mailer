@@ -61,7 +61,9 @@ class main
             else {
                 echo "Please try Again";
             }
-        } else {
+            $this->db->close();
+        }
+        else{
             $this->query = "SELECT * FROM admin_login WHERE email='$this->admin_mail' AND pass='$this->admin_pass'";
             $this->response = $this->db->query($this->query);
             if ($this->response->num_rows != 0) {
@@ -76,6 +78,7 @@ class main
             else {
                 echo "Invalid Credentials";
             }
+            $this->db->close();
         }
     }
 }

@@ -24,10 +24,12 @@ class main
         if($this->db->query($this->query))
         {
             echo "Success";
+            $this->db->close();
         }
         else
         {
             echo "Failed";
+            $this->db->close();
         }
     }
 }

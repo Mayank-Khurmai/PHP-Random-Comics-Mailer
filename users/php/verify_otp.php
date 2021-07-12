@@ -41,14 +41,13 @@ class main
         if ($this->response->num_rows != 0) {
             $this->query = "UPDATE user_data SET otp=1 WHERE email='$this->user_mail'";
             if ($this->db->query($this->query)) {
-                $this->db->close();
                 $this->send_mail_fun($this->user_mail);
                 echo "Email Verified";
             } 
             else {
-                $this->db->close();
                 echo "Please try Again";
             }
+            $this->db->close();
         } 
         else{
             $this->db->close();

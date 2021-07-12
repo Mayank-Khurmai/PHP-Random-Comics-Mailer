@@ -29,12 +29,11 @@ class main
                 }
                 array_push($this->all_data,$this->recently_added);
                 echo json_encode($this->all_data);
-                $this->db->close();
             }
             else{
                 echo json_encode($this->all_data);
-                $this->db->close();
             }
+            $this->db->close();
         }
         else{
             echo json_encode($this->all_data);

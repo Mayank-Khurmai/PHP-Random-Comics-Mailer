@@ -54,6 +54,7 @@ class main
             else{
                 echo "Email is Already Verified";
             }
+            $this->db->close();
         } 
         else{
             $this->query = "INSERT INTO user_data(email, otp) VALUES('$this->user_mail','$this->otp')";
@@ -63,6 +64,7 @@ class main
             else {
                 echo "Please try Again";
             }
+            $this->db->close();
         }
     }
 }

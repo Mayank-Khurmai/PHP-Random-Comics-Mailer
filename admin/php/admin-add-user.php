@@ -29,14 +29,17 @@ class main
         $this->response = $this->db->query($this->query);
         if ($this->response->num_rows != 0) {
                 echo "Email is Already Added";
+                $this->db->close();
         } 
         else{
             $this->query = "INSERT INTO user_data(email,otp) VALUES('$this->user_mail',1)";
             if ($this->db->query($this->query)) {
                 echo "Added Successfully";
+                $this->db->close();
             } 
             else {
                 echo "Please try Again";
+                $this->db->close();
             }
         }
     }

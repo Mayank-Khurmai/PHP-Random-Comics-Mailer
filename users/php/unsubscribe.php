@@ -27,7 +27,7 @@
 
                 <div class="section"><span>#</span>Enter your Email Address</div>
                 <div class="inner-wrap">
-                    <label>Email Address <input type="email" name="user_mail" id="user_mail" value="aayushi@gmail.com" /></label>
+                    <label>Email Address <input type="email" name="user_mail" id="user_mail" placeholder="Eg- abc@xkcd.com" /></label>
                     <label id="email-warn"></label>
                 </div>
 

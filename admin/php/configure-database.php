@@ -30,6 +30,7 @@
 
             if($this->db->query("SELECT * FROM admin_login")){
                 echo "<br>Table for admin already exists";
+                $this->db->close();
             }
             else{
                 $this->query = "CREATE TABLE admin_login(
@@ -47,7 +48,7 @@
                 }
             }
 
-            mysqli_close($this->db);
+            $this->db->close();
         }
     }
 

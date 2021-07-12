@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['admin']))
+    {
+        header("Location: http://localhost/php-Mayank-Khurmai/admin/");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 

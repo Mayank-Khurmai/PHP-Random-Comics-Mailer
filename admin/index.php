@@ -15,14 +15,14 @@
 <div class="form-style">
 
 <div id="form-style-div">
-    <h1>Sign Up Now!<span>Sign up to get random XKCD comics every five minutes!</span></h1>
+    <h1>Admin Login!<span>Sign in to visit the Admin Panel Dashboard</span></h1>
     <form>
 
         <div id="step-1">
-            <div class="section"><span>1</span>Enter your Email Address</div>
+            <div class="section"><span>1</span>Enter Login Credentials</div>
             <div class="inner-wrap">
-                <label>Email Address <input type="email" name="admin_mail" id="admin_mail" /></label>
-                <label>Password <input type="password" name="admin_mail" id="admin_pass" /></label>
+                <label>Email Address <input type="email" name="admin_mail" id="admin_mail" placeholder="Eg- abc@xkcd.com"/></label>
+                <label>Password <input type="password" name="admin_mail" id="admin_pass" placeholder="********" /></label>
                 <label id="credential-warn"></label>
             </div>
         </div>
