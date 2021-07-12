@@ -17,10 +17,6 @@ function step_two(){
     document.getElementById("credential-warn").innerHTML = "";
 }
 
-function final_step(){
-    document.getElementById("form-style-div").style.display = "none";
-    document.getElementById("tick-icon-div").style.display = "block";
-}
 
 function ajax_send_otp(admin_mail, admin_pass) {
     document.getElementById("s-otp-button").value = "Validating...";
@@ -29,7 +25,6 @@ function ajax_send_otp(admin_mail, admin_pass) {
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
             if(this.responseText.trim() == "OTP Sent Successfully"){
                 step_two();
             }
@@ -49,25 +44,24 @@ function ajax_send_otp(admin_mail, admin_pass) {
 function verify_otp(admin_mail,admin_pass,otp){
     document.getElementById("s-otp-button").value = "Verifying...";
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./php/verify_otp.php", true);
+    xhttp.open("POST", "./php/validate-admin-otp.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            // if(this.responseText.trim() == "Email Verified"){
-            //     final_step();
-            // }
-            // else if(this.responseText.trim() == "Invalid OTP"){
-            //     document.getElementById("s-otp-button").value = "Submit";
-            //     document.getElementById("credential-warn").innerHTML = "Invalid Credentials !";
-            // }
-            // else{
-            //     document.getElementById("s-otp-button").value = "Submit";
-            //     document.getElementById("credential-warn").innerHTML = "Please try Again !";
-            // }           
+            if(this.responseText.trim() == "OTP Verified"){
+                location.href = "./php/admin-home.php";
+            }
+            else if(this.responseText.trim() == "Failed"){
+                document.getElementById("s-otp-button").value = "Submit";
+                document.getElementById("otp-warn").innerHTML = "Invalid Credentials !";
+            }
+            else{
+                document.getElementById("s-otp-button").value = "Submit";
+                document.getElementById("otp-warn").innerHTML = "Please try Again !";
+            }           
         }
     }
-    xhttp.send("email="+btoa(user_mail)+"&otp="+otp);
+    xhttp.send("email="+btoa(admin_mail)+"&pass="+btoa(admin_pass)+"&otp="+btoa(otp));
 }
 
 function send_otp() {

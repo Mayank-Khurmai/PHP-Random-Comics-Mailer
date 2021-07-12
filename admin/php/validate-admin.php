@@ -19,10 +19,14 @@ class main
         $this->admin_otp = $admin_otp;
         $this->admin_hash_otp = $admin_hash_otp;
 
-        echo "OTP Sent Successfully";
-        // $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
-        // $this->message = "<h3>Hi admin, you have successfully Registered for the XKCD Comics Email Services and get mail in every 5 minutes. </h3><span>To Unsuscribe email Subscription, click <a href='www.google.com'>Unsuscribe</a>";
-        // mail($this->admin_mail,"Email Registration",$this->message,$this->header);
+        $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
+        $this->message = "<h4>Hi admin, your OTP is valid only for 2 minute </h4><h3>Your OTP for email verification is : <span style='color:red;font-weight:bold'>".$this->admin_otp."</span></h3>";
+        if(mail($this->admin_mail,"Admin panel OTP verification",$this->message,$this->header)){
+            echo "OTP Sent Successfully";
+        }
+        else{
+            echo "Please try Again";
+        }
     }
 
     public function __construct()

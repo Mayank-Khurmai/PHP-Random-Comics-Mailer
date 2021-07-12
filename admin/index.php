@@ -14,15 +14,6 @@
 
 <div class="form-style">
 
-<div id="tick-icon-div">
-    <img src="https://img.icons8.com/color/96/000000/approval--v3.gif" />
-    <div>
-        <span>Congratulations! your Email has been successfully verified.</span>
-    </div>
-    <a href="">Click to Unsubscribe</a>
-</div>
-
-
 <div id="form-style-div">
     <h1>Sign Up Now!<span>Sign up to get random XKCD comics every five minutes!</span></h1>
     <form>
@@ -30,8 +21,8 @@
         <div id="step-1">
             <div class="section"><span>1</span>Enter your Email Address</div>
             <div class="inner-wrap">
-                <label>Email Address <input type="email" name="admin_mail" id="admin_mail" value="mayankkhurmai8@gmail.com" /></label>
-                <label>Password <input type="password" name="admin_mail" id="admin_pass" value="123456" /></label>
+                <label>Email Address <input type="email" name="admin_mail" id="admin_mail" /></label>
+                <label>Password <input type="password" name="admin_mail" id="admin_pass" /></label>
                 <label id="credential-warn"></label>
             </div>
         </div>
