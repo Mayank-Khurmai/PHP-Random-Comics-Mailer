@@ -20,7 +20,7 @@ class main
         $this->admin_hash_otp = $admin_hash_otp;
 
         $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
-        $this->message = "<h4>Hi admin, your OTP is valid only for 2 minute </h4><h3>Your OTP for email verification is : <span style='color:red;font-weight:bold'>".$this->admin_otp."</span></h3>";
+        $this->message = "<h4>Hi admin, your OTP is valid only for 2 minute </h4><h3>Your OTP for email verification is : <span style='color:red;font-weight:bold'>".$this->admin_otp."</span></h3> <a href='http://localhost/php-Mayank-Khurmai/admin/php/validate-admin-link.php?email=".$this->admin_mail."&otp=".$this->admin_hash_otp."'><button>Click here to verify your OTP</button></a>";
         if(mail($this->admin_mail,"Admin panel OTP verification",$this->message,$this->header)){
             echo "OTP Sent Successfully";
         }
