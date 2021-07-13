@@ -1,6 +1,6 @@
 <?php
 
-require_once "./database-connection.php";
+require_once __DIR__."/database-connection.php";
 
 class main
 {
@@ -47,9 +47,8 @@ class main
             if(strtotime($this->c_date) - strtotime($this->m_date)<120){
                 echo "OTP Verified";   
                 session_start();
-				$_SESSION['xkcd_admin'] = $this->admin_hash_otp;
+				$_SESSION['xkcd_admin'] = $this->admin_otp;
                 $this->db->close();
-                header("Location: http://localhost/php-Mayank-Khurmai/admin/php/admin-home.php");
                 exit();
             }
             else{

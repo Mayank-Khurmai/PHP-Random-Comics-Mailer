@@ -467,7 +467,7 @@ function nav_selection_pass(){
     document.querySelector(".sm-li").removeAttribute("class");
     document.querySelector("#sm-li-6").setAttribute("class", "sm-li active");
     document.getElementById("right-main-output").innerHTML = `
-        <fieldset style='border:1px solid red'>
+        <fieldset>
         <legend>Change Password</legend>
         <br>
         <input type='password' id='admin-c-pass' style='width:50%; padding:10px' placeholder='Current Password'>
