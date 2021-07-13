@@ -16,6 +16,7 @@ class main
     private $user_mail;
     private $id;
     private $count;
+    private $status;
 
     public function __construct()
     {

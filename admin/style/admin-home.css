@@ -160,7 +160,7 @@ input[type="button"]:hover{
     box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
 }
 
-#admin-add-user-warn{
+#admin-add-user-warn, #admin-pass-warn{
     color: red !important;
 }
 

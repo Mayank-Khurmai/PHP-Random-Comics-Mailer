@@ -32,7 +32,8 @@
                     <li title="Add User" class="sm-li" id="sm-li-3" onclick="nav_selection_add()"><img src="https://img.icons8.com/ios-filled/20/000000/add--v1.png"/> <span class="nav-menu-desc">Add User</span></li>
                     <li title="Remove User" class="sm-li" id="sm-li-4" onclick="nav_selection_remove()"><img src="https://img.icons8.com/ios-glyphs/20/000000/minus.png"/> <span class="nav-menu-desc">Remove User</span></li>
                     <li title="Edit User" class="sm-li" id="sm-li-5" onclick="nav_selection_edit()"><img src="https://img.icons8.com/material-sharp/20/000000/edit--v1.png"/> <span class="nav-menu-desc">Edit User</span></li>
-                    <li title="Logout" class="sm-li" id="sm-li-6" onclick="nav_selection_logout()"><img src="https://img.icons8.com/ios-filled/20/000000/logout-rounded-up.png"/> <span class="nav-menu-desc">Logout</span></li>
+                    <li title="Change Password" class="sm-li" id="sm-li-6" onclick="nav_selection_pass()"><img src="https://img.icons8.com/ios-glyphs/20/000000/password--v1.png"/> <span class="nav-menu-desc">Password</span></li>
+                    <li title="Logout" class="sm-li" id="sm-li-7" onclick="nav_selection_logout()"><img src="https://img.icons8.com/ios-filled/20/000000/logout-rounded-up.png"/> <span class="nav-menu-desc">Logout</span></li>
                 </ul>
             </div>
         </div>

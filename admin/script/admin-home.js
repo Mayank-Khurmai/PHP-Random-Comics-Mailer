@@ -153,7 +153,8 @@ function nav_selection_dashboard() {
 
 
 window.onload = function () {
-    nav_selection_dashboard()
+    // nav_selection_dashboard()
+    nav_selection_pass()
 };
 
 function nav_selection_view(e) {
@@ -462,9 +463,31 @@ function nav_selection_edit() {
     xhttp.send();
 }
 
-function nav_selection_logout() {
+
+function nav_selection_pass(){
     document.querySelector(".sm-li").removeAttribute("class");
     document.querySelector("#sm-li-6").setAttribute("class", "sm-li active");
+    document.getElementById("right-main-output").innerHTML = `
+        <fieldset>
+        <legend>Change Password</legend>
+        <br>
+        <input type='password' id='admin-c-pass' style='width:50%; padding:10px' placeholder='Current Password'>
+        <br><br><hr width='50%' align='left'><br>
+        <input type='password' id='admin-n1-pass' style='width:50%; padding:10px' placeholder='New Password'>
+        <br><br>
+        <input type='password' id='admin-n2-pass' style='width:50%; padding:10px' placeholder='Confirm Password'>
+        <br>
+        <span id="admin-pass-warn"></span>
+        <br><br>
+        <input type='button' value='Change Password' id='admin-change-pass-btn' onclick='admin_change_pass()'>
+        </fieldset>
+    `;
+}
+
+
+function nav_selection_logout() {
+    document.querySelector(".sm-li").removeAttribute("class");
+    document.querySelector("#sm-li-7").setAttribute("class", "sm-li active");
     document.getElementById("right-main-output").innerHTML = "Logging you out......";
     location.href = "./admin-logout.php";
 }
@@ -543,6 +566,50 @@ function admin_remove_user(id) {
         }
     }
     xhttp.send("id=" + id);
+}
+
+
+function admin_change_pass(){
+    var pass_warn = document.getElementById("admin-pass-warn");
+    var c_pass = document.getElementById("admin-c-pass").value;
+    var n1_pass = document.getElementById("admin-n1-pass").value;
+    var n2_pass = document.getElementById("admin-n2-pass").value;
+    var c_pass_btn = document.getElementById("admin-change-pass-btn");
+    if(c_pass!="" & n1_pass!="" & n2_pass!=""){
+        if(n1_pass!=n2_pass){
+            pass_warn.innerHTML = "Password do not Match !";
+        }
+        else{
+            pass_warn.innerHTML="";
+            c_pass_btn.value="Changing...";
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "./admin-update-pass.php", true);
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhttp.onload = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText.trim() == "Password Changed") {
+                        c_pass_btn.value="Password Updated";
+                        setTimeout(
+                            () => {
+                                nav_selection_pass();
+                            }, 2500);
+                    }
+                    else if (this.responseText.trim() == "Incorrect Password") {
+                        c_pass_btn.value="Change Password";
+                        pass_warn.innerHTML="Incorrect Password !";
+                    }
+                    else {
+                        pass_warn.innerHTML = "Please try Again !";
+                        c_pass_btn.value="Change Password";
+                    }    
+                }
+            }
+            xhttp.send("cpass=" + btoa(c_pass) + "&npass=" + btoa(n1_pass));
+        }
+    }
+    else{
+        pass_warn.innerHTML="Cannot be Empty !";
+    }
 }
 
 
