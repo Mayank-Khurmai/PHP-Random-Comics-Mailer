@@ -153,8 +153,7 @@ function nav_selection_dashboard() {
 
 
 window.onload = function () {
-    // nav_selection_dashboard()
-    nav_selection_pass()
+    nav_selection_dashboard();
 };
 
 function nav_selection_view(e) {
@@ -468,7 +467,7 @@ function nav_selection_pass(){
     document.querySelector(".sm-li").removeAttribute("class");
     document.querySelector("#sm-li-6").setAttribute("class", "sm-li active");
     document.getElementById("right-main-output").innerHTML = `
-        <fieldset>
+        <fieldset style='border:1px solid red'>
         <legend>Change Password</legend>
         <br>
         <input type='password' id='admin-c-pass' style='width:50%; padding:10px' placeholder='Current Password'>
