@@ -48,12 +48,11 @@ class main
             else {
                 echo "Please try Again";
             }
-            $this->db->close();
         }
         else{
-            $this->db->close();
             echo "Incorrect Password";
         }
+        $this->db->close();
     }
 }
 

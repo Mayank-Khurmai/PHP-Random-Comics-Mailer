@@ -14,9 +14,11 @@ function final_step(){
 }
 
 function unsubscribe_request(user_mail){
+    var email_warn = document.getElementById("email-warn");
+    var s_otp_btn = document.getElementById("s-otp-button");
     document.getElementById("s-otp-button").value = "Unsubscribing...";
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "../php/verify-unsubscribe.php", true);
+    xhttp.open("POST", "../php/unsubscribe-verify.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -24,16 +26,16 @@ function unsubscribe_request(user_mail){
                 final_step();
             }
             else if(this.responseText.trim() == "Invalid Email"){
-                document.getElementById("s-otp-button").value = "Unsubscribe";
-                document.getElementById("email-warn").innerHTML = "Invalid Email !";
+                s_otp_btn.value = "Unsubscribe";
+                email_warn.innerHTML = "Invalid Email !";
             }
             else if(this.responseText.trim() == "Email not Found"){
-                document.getElementById("s-otp-button").value = "Unsubscribe";
-                document.getElementById("email-warn").innerHTML = "Email not Found !";
+                s_otp_btn.value = "Unsubscribe";
+                email_warn.innerHTML = "Email not Found !";
             }
             else{
-                document.getElementById("s-otp-button").value = "Unsubscribe";
-                document.getElementById("email-warn").innerHTML = "Please try Again !";
+                s_otp_btn.value = "Unsubscribe";
+                email_warn.innerHTML = "Please try Again !";
             }            
         }
     }

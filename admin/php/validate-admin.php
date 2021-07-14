@@ -52,35 +52,41 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
+        $this->admin_mail = mysqli_real_escape_string($this->db,$this->admin_mail);
         $this->query = "SELECT * FROM admin_login";
         $this->response = $this->db->query($this->query);
         if ($this->response->num_rows == 0) {
-            $this->query = "INSERT INTO admin_login(email,pass,otp) VALUES('$this->admin_mail','$this->admin_pass','$this->admin_hash_otp')";
-            if ($this->db->query($this->query)) {
+            $this->query = $this->db->prepare("INSERT INTO admin_login(email,pass,otp) VALUES(?,?,?)");
+            $this->query->bind_param('sss',$this->admin_mail,$this->admin_pass,$this->admin_hash_otp);
+            $this->query->execute();
+            if($this->query->affected_rows!=0){
                 $this->send_mail_fun($this->admin_mail,$this->admin_otp,$this->admin_hash_otp);
             }
-            else {
+            else{
                 echo "Please try Again";
             }
-            $this->db->close();
         }
         else{
-            $this->query = "SELECT * FROM admin_login WHERE email='$this->admin_mail' AND pass='$this->admin_pass'";
-            $this->response = $this->db->query($this->query);
-            if ($this->response->num_rows != 0) {
-                $this->query = "UPDATE admin_login SET otp='$this->admin_hash_otp' WHERE email='$this->admin_mail' AND pass='$this->admin_pass'";
-                if ($this->db->query($this->query)) {
+            $this->query = $this->db->prepare("SELECT * FROM admin_login WHERE email=? AND pass=?");
+            $this->query->bind_param('ss',$this->admin_mail,$this->admin_pass);
+            $this->query->execute();
+            $this->query->store_result();
+            if ($this->query->num_rows != 0) {
+                $this->query = $this->db->prepare("UPDATE admin_login SET otp=? WHERE email=? AND pass=?");
+                $this->query->bind_param('sss',$this->admin_hash_otp,$this->admin_mail,$this->admin_pass);
+                $this->query->execute();
+                if($this->query->affected_rows!=0){
                     $this->send_mail_fun($this->admin_mail,$this->admin_otp,$this->admin_hash_otp);
-                } 
-                else {
+                }
+                else{
                     echo "Please try Again";
                 }
-            }
-            else {
+            } 
+            else{
                 echo "Invalid Credentials";
             }
-            $this->db->close();
         }
+        $this->db->close();
     }
 }
 

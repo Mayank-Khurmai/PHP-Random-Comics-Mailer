@@ -35,23 +35,27 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "SELECT * FROM user_data WHERE otp=1 AND email='$this->user_mail'";
-        $this->response = $this->db->query($this->query);
-        if ($this->response->num_rows != 0) {
-            $this->query = "UPDATE user_data SET otp=0 WHERE email = '$this->user_mail'";
-            if ($this->db->query($this->query)) {
+        $this->user_mail = mysqli_real_escape_string($this->db,$this->user_mail);
+        $this->query = $this->db->prepare("SELECT * FROM user_data WHERE otp=1 AND email=?");
+        $this->query->bind_param('s',$this->user_mail);
+        $this->query->execute();
+        $this->query->store_result();
+        if ($this->query->num_rows != 0) {
+            $this->query = $this->db->prepare("UPDATE user_data SET otp=0 WHERE email=?");
+            $this->query->bind_param('s',$this->user_mail);
+            $this->query->execute();
+            if($this->query->affected_rows!=0){
                 $this->send_mail_fun($this->user_mail);
                 echo "Email Unsubscribed";
-            } 
-            else {
-                echo "Please try Again";
             }
-            $this->db->close();
+            else{
+                echo "Please try Again 1";
+            }
         } 
         else{
-            $this->db->close();
             echo "Email not Found";
         }
+        $this->db->close();
     }
 }
 

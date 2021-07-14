@@ -13,7 +13,6 @@ class main
 {
     private $db;
     private $query;
-    private $response;
     private $user_mail;
 
     public function __construct()
@@ -27,28 +26,31 @@ class main
         }
         if (!filter_var($this->user_mail, FILTER_VALIDATE_EMAIL)) {
             echo "Invalid Email";
-            exit();
+            exit(); 
         }
 
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "SELECT * FROM user_data WHERE email ='$this->user_mail'";
-        $this->response = $this->db->query($this->query);
-        if ($this->response->num_rows != 0) {
-                echo "Email is Already Added";
-                $this->db->close();
+        $this->user_mail = mysqli_real_escape_string($this->db,$this->user_mail);
+        $this->query = $this->db->prepare("SELECT * FROM user_data WHERE email =?");
+        $this->query->bind_param('s',$this->user_mail);
+        $this->query->execute();
+        $this->query->store_result();
+        if ($this->query->num_rows != 0) {
+            echo "Email is Already Added";
         } 
         else{
-            $this->query = "INSERT INTO user_data(email,otp) VALUES('$this->user_mail',1)";
-            if ($this->db->query($this->query)) {
+            $this->query = $this->db->prepare("INSERT INTO user_data(email,otp) VALUES(?,1)");
+            $this->query->bind_param('s',$this->user_mail);
+            $this->query->execute();
+            if($this->query->affected_rows!=0){
                 echo "Added Successfully";
-                $this->db->close();
-            } 
-            else {
+            }
+            else{
                 echo "Please try Again";
-                $this->db->close();
             }
         }
+        $this->db->close();
     }
 }
 

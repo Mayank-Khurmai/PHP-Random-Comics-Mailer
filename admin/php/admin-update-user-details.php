@@ -14,14 +14,14 @@ class main
     private $db;
     private $query;
     private $user_mail;
-    private $id;
+    private $user_id;
     private $count;
     private $status;
 
     public function __construct()
     {
         if(isset($_POST['id']) & isset($_POST['email']) & isset($_POST['count']) & isset($_POST['status'])){
-            $this->id = $_POST["id"];
+            $this->user_id = $_POST["id"];
             $this->user_mail = $_POST["email"];
             $this->count = $_POST["count"];
             $this->status = $_POST["status"];
@@ -36,16 +36,20 @@ class main
         }
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "UPDATE user_data SET email='$this->user_mail', otp='$this->status', count='$this->count' WHERE id='$this->id'";
-        $this->response = $this->db->query($this->query);
-        if ($this->db->query($this->query)) {
-            $this->db->close();
+        $this->user_id = mysqli_real_escape_string($this->db,$this->user_id);
+        $this->user_mail = mysqli_real_escape_string($this->db,$this->user_mail);
+        $this->count = mysqli_real_escape_string($this->db,$this->count);
+        $this->status = mysqli_real_escape_string($this->db,$this->status);
+        $this->query = $this->db->prepare("UPDATE user_data SET email=?, otp=?, count=? WHERE id=?");
+        $this->query->bind_param('siii',$this->user_mail,$this->status,$this->count,$this->user_id);
+        $this->query->execute();
+        if($this->query->affected_rows!=0){
             echo "Success";
-        } 
-        else {
-            $this->db->close();
+        }
+        else{
             echo "Please try Again";
         }
+        $this->db->close();
     }
 }
 

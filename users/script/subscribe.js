@@ -22,9 +22,12 @@ function final_step(){
 }
 
 function ajax_send_otp(user_mail) {
-    document.getElementById("s-otp-button").value = "Sending...";
+    var email_warn = document.getElementById("email-warn");
+    var s_otp_btn = document.getElementById("s-otp-button");
+    s_otp_btn.value = "Sending...";
+    email_warn.innerHTML = "";
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./php/send_otp.php", true);
+    xhttp.open("POST", "./users/php/send_otp.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -32,16 +35,16 @@ function ajax_send_otp(user_mail) {
                 step_two();
             }
             else if(this.responseText.trim() == "Email is Already Verified"){
-                document.getElementById("s-otp-button").value = "Send OTP";
-                document.getElementById("email-warn").innerHTML = "Email is Already Verified !";
+                s_otp_btn.value = "Send OTP";
+                email_warn.innerHTML = "Email is Already Verified !";
             }
             else if(this.responseText.trim() == "Invalid Email"){
-                document.getElementById("s-otp-button").value = "Send OTP";
-                document.getElementById("email-warn").innerHTML = "Invalid Email !";
+                s_otp_btn.value = "Send OTP";
+                email_warn.innerHTML = "Invalid Email !";
             }
             else{
-                document.getElementById("s-otp-button").value = "Send OTP";
-                document.getElementById("email-warn").innerHTML = "Please try Again !";
+                s_otp_btn.value = "Send OTP";
+                email_warn = "Please try Again !";
             }            
         }
     }
@@ -49,9 +52,11 @@ function ajax_send_otp(user_mail) {
 }
 
 function verify_otp(user_mail,otp){
-    document.getElementById("s-otp-button").value = "Verifying...";
+    var otp_warn = document.getElementById("otp-warn");
+    var s_otp_btn = document.getElementById("s-otp-button");
+    s_otp_btn.value = "Verifying...";
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./php/verify_otp.php", true);
+    xhttp.open("POST", "./users/php/verify_otp.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -59,12 +64,12 @@ function verify_otp(user_mail,otp){
                 final_step();
             }
             else if(this.responseText.trim() == "Invalid OTP"){
-                document.getElementById("s-otp-button").value = "Submit";
-                document.getElementById("otp-warn").innerHTML = "Invalid OTP !";
+                s_otp_btn.value = "Submit";
+                otp_warn.innerHTML = "Invalid OTP !";
             }
             else{
-                document.getElementById("s-otp-button").value = "Submit";
-                document.getElementById("otp-warn").innerHTML = "Please try Again !";
+                s_otp_btn.value = "Submit";
+                otp_warn.innerHTML = "Please try Again !";
             }           
         }
     }
@@ -76,12 +81,13 @@ function send_otp() {
     var otp_warn = document.getElementById("otp-warn");
     var user_mail = document.getElementById("user_mail").value;
     var otp = document.getElementById("otp").value;
-    if (document.getElementById("s-otp-button").getAttribute("flag") == "step-1") {
+    var s_otp_btn = document.getElementById("s-otp-button");
+    if (s_otp_btn.getAttribute("flag") == "step-1") {
         if (user_mail != "" & email_validate(user_mail)) {
             ajax_send_otp(user_mail);
         }
         else {
-            document.getElementById("s-otp-button").value = "Send OTP";
+            s_otp_btn.value = "Send OTP";
             email_warn.innerHTML = "Invalid Email !";
         }
     }
@@ -92,7 +98,7 @@ function send_otp() {
             verify_otp(user_mail,otp);
         }
         else {
-            document.getElementById("s-otp-button").value = "Submit";
+            s_otp_btn.value = "Submit";
             otp_warn.innerHTML = "Invalid OTP !";
         }        
     }

@@ -27,17 +27,17 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "DELETE FROM user_data WHERE id = '$this->id'";
-        if($this->db->query($this->query))
-        {
+        $this->user_mail = mysqli_real_escape_string($this->db,$this->id);
+        $this->query = $this->db->prepare("DELETE FROM user_data WHERE id=?");
+        $this->query->bind_param('i',$this->id);
+        $this->query->execute();
+        if($this->query->affected_rows!=0){
             echo "Success";
-            $this->db->close();
         }
-        else
-        {
+        else{
             echo "Failed";
-            $this->db->close();
         }
+        $this->db->close();
     }
 }
 

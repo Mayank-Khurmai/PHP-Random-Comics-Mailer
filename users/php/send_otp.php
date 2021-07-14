@@ -6,10 +6,9 @@ class main
 {
     private $db;
     private $query;
-    private $response;
     private $user_mail;
     private $otp;
-    private $data;
+    private $new_otp;
     private $header;
     private $message;
     
@@ -19,7 +18,7 @@ class main
         $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
         $this->message = "<h3>Your OTP for email verification is : <span style='color:red'>".$this->otp."</span></h3>";
 
-        if(mail("mayankkhurmai8@gmail.com","Email OTP Verification",$this->message,$this->header)){
+        if(mail($this->user_mail,"Email OTP Verification",$this->message,$this->header)){
             echo "OTP Sent Successfully";
         }
         else{
@@ -40,32 +39,49 @@ class main
             echo "Invalid Email";
             exit();
         }
-        $this->otp = random_int(100000, 999999);
+        $this->new_otp = random_int(100000, 999999);
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "SELECT * FROM user_data WHERE email ='$this->user_mail'";
-        $this->response = $this->db->query($this->query);
-        if ($this->response->num_rows != 0) {
-            $this->data = $this->response->fetch_assoc();
-            if($this->data['otp'] != 0){
-                $this->otp = $this->data['otp'];                
-                $this->send_mail_fun($this->user_mail,$this->otp);
+        $this->user_mail = mysqli_real_escape_string($this->db,$this->user_mail);
+        $this->query = $this->db->prepare("SELECT otp FROM user_data WHERE email=?");
+        $this->query->bind_param('s',$this->user_mail);
+        $this->query->execute();
+        $this->query->store_result();
+        if ($this->query->num_rows != 0) {
+            $this->query->bind_result($this->otp);
+            $this->query->fetch();
+            if($this->otp != 1){
+                if($this->otp !=0){        
+                    $this->send_mail_fun($this->user_mail,$this->otp);
+                }
+                else{
+                    $this->query = $this->db->prepare("UPDATE user_data SET otp=? WHERE email=?");
+                    $this->query->bind_param('is',$this->new_otp,$this->user_mail);
+                    $this->query->execute();
+                    if($this->query->affected_rows!=0){
+                        $this->send_mail_fun($this->user_mail,$this->new_otp);
+                    }
+                    else{
+                        echo "Please try Again 1";
+                    }
+                }
             }   
             else{
                 echo "Email is Already Verified";
             }
-            $this->db->close();
-        } 
+        }
         else{
-            $this->query = "INSERT INTO user_data(email, otp) VALUES('$this->user_mail','$this->otp')";
-            if ($this->db->query($this->query)) {
-                $this->send_mail_fun($this->user_mail,$this->otp);
-            } 
-            else {
+            $this->query = $this->db->prepare("INSERT INTO user_data(email,otp) VALUES(?,?)");
+            $this->query->bind_param('ss',$this->user_mail,$this->new_otp);
+            $this->query->execute();
+            if($this->query->affected_rows!=0){
+                $this->send_mail_fun($this->user_mail,$this->new_otp);
+            }
+            else{
                 echo "Please try Again";
             }
-            $this->db->close();
         }
+        $this->db->close();
     }
 }
 

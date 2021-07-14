@@ -6,7 +6,6 @@ class main
 {
     private $db;
     private $query;
-    private $response;
     private $admin_mail;
     private $admin_hash_otp;
     private $m_date;
@@ -30,15 +29,19 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "SELECT * FROM admin_login WHERE email='$this->admin_mail' AND otp='$this->admin_hash_otp'";
-        $this->response = $this->db->query($this->query);
-        if ($this->response->num_rows != 0) {
-            $this->data = $this->response->fetch_assoc();
-            $this->m_date = $this->data['modified_date'];
+        $this->admin_mail = mysqli_real_escape_string($this->db,$this->admin_mail);
+        $this->admin_hash_otp = mysqli_real_escape_string($this->db,$this->admin_hash_otp);
+        $this->query = $this->db->prepare("SELECT modified_date FROM admin_login WHERE email=? AND otp=?");
+        $this->query->bind_param('ss',$this->admin_mail,$this->admin_hash_otp);
+        $this->query->execute();
+        $this->query->store_result();
+        if ($this->query->num_rows != 0) {
+            $this->query->bind_result($this->m_date);
+            $this->query->fetch();
             $this->c_date =date("Y-m-d H:i:s");
-            if(strtotime($this->c_date) - strtotime($this->m_date)>120){
+            if(strtotime($this->c_date) - strtotime($this->m_date)<120){
                 session_start();
-				$_SESSION['xkcd_admin'] = $this->admin_hash_otp;
+                $_SESSION['xkcd_admin'] = $this->admin_hash_otp;
                 $this->db->close();
                 header("Location: http://localhost/php-Mayank-Khurmai/admin/php/admin-home.php");
                 exit();
@@ -48,8 +51,8 @@ class main
                 header("Location: http://localhost/php-Mayank-Khurmai/admin/");
                 exit();
             }
-        }
-        else{   
+        } 
+        else{
             $this->db->close();
             header("Location: http://localhost/php-Mayank-Khurmai/admin/");
             exit();
