@@ -52,6 +52,8 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
+        $this->admin_mail = trim($this->admin_mail);
+        $this->admin_mail = htmlspecialchars($this->admin_mail,ENT_QUOTES);
         $this->admin_mail = mysqli_real_escape_string($this->db,$this->admin_mail);
         $this->query = "SELECT * FROM admin_login";
         $this->response = $this->db->query($this->query);

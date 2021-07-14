@@ -36,7 +36,11 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
+        $this->user_mail = trim($this->user_mail);
+        $this->user_mail = htmlspecialchars($this->user_mail,ENT_QUOTES);
         $this->user_mail = mysqli_real_escape_string($this->db,$this->user_mail);
+        $this->otp = trim($this->otp);
+        $this->otp = htmlspecialchars($this->otp,ENT_QUOTES);
         $this->otp = mysqli_real_escape_string($this->db,$this->otp);
         $this->query = $this->db->prepare("SELECT * FROM user_data WHERE email=? AND otp=?");
         $this->query->bind_param('si',$this->user_mail,$this->otp);

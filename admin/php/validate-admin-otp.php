@@ -36,6 +36,8 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
+        $this->admin_mail = trim($this->admin_mail);
+        $this->admin_mail = htmlspecialchars($this->admin_mail,ENT_QUOTES);
         $this->admin_mail = mysqli_real_escape_string($this->db,$this->admin_mail);
         $this->query = $this->db->prepare("SELECT modified_date FROM admin_login WHERE pass=? AND email=? AND otp=?");
         $this->query->bind_param('sss',$this->admin_pass,$this->admin_mail,$this->admin_otp);

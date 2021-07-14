@@ -31,6 +31,8 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
+        $this->user_mail = trim($this->user_mail);
+        $this->user_mail = htmlspecialchars($this->user_mail,ENT_QUOTES);
         $this->user_mail = mysqli_real_escape_string($this->db,$this->user_mail);
         $this->query = $this->db->prepare("SELECT * FROM user_data WHERE email =?");
         $this->query->bind_param('s',$this->user_mail);

@@ -29,7 +29,11 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
+        $this->admin_mail = trim($this->admin_mail);
+        $this->admin_mail = htmlspecialchars($this->admin_mail,ENT_QUOTES);
         $this->admin_mail = mysqli_real_escape_string($this->db,$this->admin_mail);
+        $this->admin_hash_otp = trim($this->admin_hash_otp);
+        $this->admin_hash_otp = htmlspecialchars($this->admin_hash_otp,ENT_QUOTES);
         $this->admin_hash_otp = mysqli_real_escape_string($this->db,$this->admin_hash_otp);
         $this->query = $this->db->prepare("SELECT modified_date FROM admin_login WHERE email=? AND otp=?");
         $this->query->bind_param('ss',$this->admin_mail,$this->admin_hash_otp);

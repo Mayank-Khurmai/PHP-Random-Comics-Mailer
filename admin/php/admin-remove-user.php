@@ -27,7 +27,9 @@ class main
 
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->user_mail = mysqli_real_escape_string($this->db,$this->id);
+        $this->id = trim($this->id);
+        $this->id = htmlspecialchars($this->id,ENT_QUOTES);
+        $this->id = mysqli_real_escape_string($this->db,$this->id);
         $this->query = $this->db->prepare("DELETE FROM user_data WHERE id=?");
         $this->query->bind_param('i',$this->id);
         $this->query->execute();

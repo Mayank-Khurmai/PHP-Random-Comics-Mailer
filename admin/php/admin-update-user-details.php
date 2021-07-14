@@ -36,9 +36,17 @@ class main
         }
         $this->db = new db();
         $this->db = $this->db->database();
+        $this->user_id = trim($this->user_id);
+        $this->user_id = htmlspecialchars($this->user_id,ENT_QUOTES);
         $this->user_id = mysqli_real_escape_string($this->db,$this->user_id);
+        $this->user_mail = trim($this->user_mail);
+        $this->user_mail = htmlspecialchars($this->user_mail,ENT_QUOTES);
         $this->user_mail = mysqli_real_escape_string($this->db,$this->user_mail);
+        $this->count = trim($this->count);
+        $this->count = htmlspecialchars($this->count,ENT_QUOTES);
         $this->count = mysqli_real_escape_string($this->db,$this->count);
+        $this->status = trim($this->status);
+        $this->status = htmlspecialchars($this->status,ENT_QUOTES);
         $this->status = mysqli_real_escape_string($this->db,$this->status);
         $this->query = $this->db->prepare("UPDATE user_data SET email=?, otp=?, count=? WHERE id=?");
         $this->query->bind_param('siii',$this->user_mail,$this->status,$this->count,$this->user_id);
