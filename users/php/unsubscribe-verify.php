@@ -14,7 +14,16 @@ class main
     public function send_mail_fun($user_mail){
         $this->user_mail = $user_mail;
         $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
-        $this->message = "<h3>Hi User, you you will not receive any email XKCD Comics more.</h3><span>If you want to subscribe again, the click on <a href='www.google.com'>subscribe</a></span>";
+       $this->message = "
+            <body style='background-color:rgb(238,238,238);padding-top:10px;padding-bottom:10px;text-align:center;'>
+                <div style='width:50%;margin:0 auto;background-color:rgb(248,248,248);padding:10px'>
+                    <h3>Welcome User</h3>
+                    <h5>You have unsubscribed for the XKCD email services and did not get any email anymore</h5>
+                    <span><a href='www.google.com'>Click to Subscribe Again</a>
+                </div>
+            </body>
+        ";
+        
         mail($this->user_mail,"Email Unsubscription",$this->message,$this->header);
     }
 

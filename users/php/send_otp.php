@@ -16,9 +16,16 @@ class main
         $this->user_mail = $user_mail;
         $this->otp = $otp;
         $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
-        $this->message = "<h3>Your OTP for email verification is : <span style='color:red'>".$this->otp."</span></h3>";
+        $this->message = "
+            <body style='background-color:rgb(238,238,238);padding-top:10px;padding-bottom:10px;text-align:center;'>
+                <div style='width:50%;margin:0 auto;background-color:rgb(248,248,248);padding:10px'>
+                    <h3>Your OTP for email verification is</h3>
+                    <h1>".$this->otp."</h1>
+                </div>
+            </body>
+        ";
 
-        if(mail($this->user_mail,"Email OTP Verification",$this->message,$this->header)){
+        if(mail($this->user_mail,"Email Subscription",$this->message,$this->header)){
             echo "OTP Sent Successfully";
         }
         else{

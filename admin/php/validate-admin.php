@@ -21,7 +21,17 @@ class main
         $this->admin_hash_otp = $admin_hash_otp;
 
         $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
-        $this->message = "<h4>Hi admin, your OTP is valid only for 2 minute </h4><h3>Your OTP for email verification is : <span style='color:red;font-weight:bold'>".$this->admin_otp."</span></h3> <a href='http://localhost/php-Mayank-Khurmai/admin/php/validate-admin-link.php?email=".$this->admin_mail."&otp=".$this->admin_hash_otp."'><button>Click here to verify your OTP</button></a>";
+        $this->message = "
+            <body style='background-color:rgb(238,238,238);padding-top:10px;padding-bottom:10px;text-align:center;'>
+                <div style='width:50%;margin:0 auto;background-color:rgb(248,248,248);padding:10px'>
+                    <h3>Your OTP is valid only for 2 minutes</h3>
+                    <h1>".$this->admin_otp."</h1>
+                    <h4>OR</h4>
+                    <a href='http://localhost/php-Mayank-Khurmai/admin/php/validate-admin-link.php?email=".$this->admin_mail."&otp=".$this->admin_hash_otp."'><button style='border-radius:10px;cursor:pointer'><h3 style='cursor:pointer'>Click here to verify your OTP</h3></button></a>
+                </div>
+            </body>
+        ";
+        
         if(mail($this->admin_mail,"Admin panel OTP verification",$this->message,$this->header)){
             echo "OTP Sent Successfully";
         }

@@ -15,8 +15,17 @@ class main
     public function send_mail_fun($user_mail){
         $this->user_mail = $user_mail;
         $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
-        $this->message = "<h3>Hi User, you have successfully Registered for the XKCD Comics Email Services and get mail in every 5 minutes. </h3><span>To Unsuscribe email Subscription, click <a href='www.google.com'>Unsuscribe</a>";
-        mail($this->user_mail,"Email Registration",$this->message,$this->header);
+        $this->message = "
+            <body style='background-color:rgb(238,238,238);padding-top:10px;padding-bottom:10px;text-align:center;'>
+                <div style='width:50%;margin:0 auto;background-color:rgb(248,248,248);padding:10px'>
+                    <h3>Welcome User</h3>
+                    <h5>You have successfully registered for the XKCD Comics email services and get an email in every 5 minutes</h5>
+                    <span><a href='www.google.com'>Click to Unsubscribe</a>
+                </div>
+            </body>
+        ";
+       
+        mail($this->user_mail,"Email Subscription",$this->message,$this->header);
     }
 
     public function __construct()
