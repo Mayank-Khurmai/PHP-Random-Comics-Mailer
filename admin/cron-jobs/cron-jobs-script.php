@@ -24,6 +24,7 @@ class main
         $this->send_mail = $user_mail;
         $this->boundary = md5("random");
 
+        // Fetching and Sanitizing content from xkcd
         $this->header_array = get_headers("https://c.xkcd.com/random/comic",1);   // fetch all the headers sent by the server in the response of an HTTP request and non-negative integer give it as associative array                              
         $this->url_location = $this->header_array['Location'][1]; 
         $this->url = $this->url_location.'/info.0.json'; // path to your JSON        
@@ -71,7 +72,7 @@ class main
         $this->msg_body .="X-Attachment-Id: ".rand(1000, 99999)."\n";
         $this->msg_body .= $this->img_encoded_content;
 
-
+        // Final function to send mail using SMTP
         mail($this->send_mail,"#".$this->url_content->num." - ".$this->url_content->title,$this->msg_body,$this->header);
     }
 
@@ -91,6 +92,34 @@ class main
         }
         $this->db->close();
     }
+
+    public function __destruct()
+    {
+        // echo "Currently used memory : ";
+        // echo memory_get_usage()/1024;
+   
+        // echo "<br>Peak used memory : ";
+        // echo memory_get_peak_usage()/1024;
+    
+        unset($this->db);
+        unset($this->query);
+        unset($this->response);
+        unset($this->data);
+        unset($this->user_mail);
+        unset($this->send_mail);
+        unset($this->count);
+        unset($this->header);
+        unset($this->comic_desc);
+        unset($this->message);
+        unset($this->header_array);
+        unset($this->url_location);
+        unset($this->url_content);
+        unset($this->boundary);
+        unset($this->msg_body);
+        unset($this->img_content);
+        unset($this->img_encoded_content);
+    }
+
 }
 
 new main();
