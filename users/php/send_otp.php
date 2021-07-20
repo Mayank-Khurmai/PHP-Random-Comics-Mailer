@@ -92,6 +92,17 @@ class main
         }
         $this->db->close();
     }
+
+    public function __destruct()
+    {
+        unset($this->db);
+        unset($this->query);
+        unset($this->user_mail);
+        unset($this->otp);
+        unset($this->new_otp);
+        unset($this->header);
+        unset($this->message);
+    }
 }
 
 new main();

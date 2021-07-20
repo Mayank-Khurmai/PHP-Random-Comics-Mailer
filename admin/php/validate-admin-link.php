@@ -62,6 +62,16 @@ class main
             exit();
         }
     }
+
+    public function __destruct()
+    {
+        unset($this->db);
+        unset($this->query);
+        unset($this->admin_mail);
+        unset($this->admin_hash_otp);
+        unset($this->m_date);
+        unset($this->c_date);
+    }
 }
 
 new main();

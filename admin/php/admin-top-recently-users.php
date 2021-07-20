@@ -46,6 +46,16 @@ class main
         }
         $this->db->close();
     }
+
+    public function __destruct()
+    {
+        unset($this->db);
+        unset($this->query);
+        unset($this->response);
+        unset($this->top_users);
+        unset($this->recently_added);
+        unset($this->all_data);
+    }
 }
 
 new main();

@@ -43,6 +43,14 @@ class main
         }
         $this->db->close();
     }
+
+    public function __destruct()
+    {
+        unset($this->db);
+        unset($this->query);
+        unset($this->response);
+        unset($this->all_data);
+    }
 }
 
 new main();

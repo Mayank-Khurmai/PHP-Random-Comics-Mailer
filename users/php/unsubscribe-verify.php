@@ -6,7 +6,6 @@ class main
 {
     private $db;
     private $query;
-    private $response;
     private $user_mail;
     private $header;
     private $message;
@@ -67,6 +66,15 @@ class main
             echo "Email not Found";
         }
         $this->db->close();
+    }
+
+    public function __destruct()
+    {
+        unset($this->db);
+        unset($this->query);
+        unset($this->user_mail);
+        unset($this->header);
+        unset($this->message);
     }
 }
 

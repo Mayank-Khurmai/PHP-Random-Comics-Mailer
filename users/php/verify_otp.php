@@ -6,7 +6,6 @@ class main
 {
     private $db;
     private $query;
-    private $response;
     private $user_mail;
     private $otp;
     private $header;
@@ -71,6 +70,16 @@ class main
             echo "Invalid OTP";
         }
         $this->db->close();
+    }
+
+    public function __destruct()
+    {
+        unset($this->db);
+        unset($this->query);
+        unset($this->user_mail);
+        unset($this->otp);
+        unset($this->header);
+        unset($this->message);
     }
 }
 

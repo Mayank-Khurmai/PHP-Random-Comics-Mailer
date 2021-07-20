@@ -59,6 +59,16 @@ class main
         }
         $this->db->close();
     }
+
+    public function __destruct()
+    {
+        unset($this->db);
+        unset($this->query);
+        unset($this->user_mail);
+        unset($this->user_id);
+        unset($this->count);
+        unset($this->status);
+    }
 }
 
 new main();
