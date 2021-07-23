@@ -15,14 +15,14 @@
         <div id="tick-icon-div">
             <img src="https://img.icons8.com/color/96/000000/approval--v3.gif" />
             <div>
-                <span>Congratulations! you has been successfully Unsubscribed.</span>
+                <span>Congratulations! You has been Unsubscribed successfully .</span>
             </div>
             <a href="../../index.php">Click to Subscribe</a>
         </div>
 
 
         <div id="form-style-div">
-            <h1>Unsubscribe Now!<span>By Unsubscribing, you will not receive any XKCD comics email!</span></h1>
+            <h1>Unsubscribe Now!<span>By Unsubscribing, you will not receive any XKCD comics mails!</span></h1>
             <form>
 
                 <div class="section"><span>#</span>Enter your Email Address</div>

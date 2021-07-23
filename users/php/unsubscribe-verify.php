@@ -18,7 +18,7 @@ class main
                 <div style='width:50%;margin:0 auto;background-color:rgb(248,248,248);padding:10px'>
                     <h3>Welcome User</h3>
                     <h5>You have unsubscribed for the XKCD email services and did not get any email anymore</h5>
-                    <span><a href='www.google.com'>Click to Subscribe Again</a></span>
+                    <span><a href='www.google.com'>Click to Subscribe again</a></span>
                 </div>
             </body>
         ";

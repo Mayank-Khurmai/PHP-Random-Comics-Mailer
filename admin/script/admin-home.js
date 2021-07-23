@@ -15,7 +15,7 @@ function admin_total_mails_users_active() {
             div_in_img.setAttribute("src", "https://img.icons8.com/office/100/000000/secured-letter--v4.png");
             div_in1.append(div_in_img);
             var div_in_div = document.createElement("div");
-            div_in_div.innerHTML = "Total Mail Sent";
+            div_in_div.innerHTML = "Total Mails Sent";
             div_in1.append(div_in_div);
             var div_in_div = document.createElement("div");
             div_in_div.setAttribute("class", "dashboard-top-title");
