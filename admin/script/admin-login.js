@@ -62,7 +62,7 @@ function verify_otp(admin_mail,admin_pass,otp){
             }
             else if(this.responseText.trim() == "Failed"){
                 s_otp_btn.value = "Submit";
-                otp_warn.innerHTML = "Invalid Credentials !";
+                otp_warn.innerHTML = "Invalid OTP !";
             }
             else{
                 s_otp_btn.value = "Submit";
