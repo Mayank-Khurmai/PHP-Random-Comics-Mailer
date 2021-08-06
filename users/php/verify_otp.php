@@ -2,7 +2,7 @@
 
 require_once __DIR__."/database-connection.php";
 
-class main
+class verify_otp
 {
     private $db;
     private $query;
@@ -83,6 +83,6 @@ class main
     }
 }
 
-new main();
+new verify_otp();
 
 ?>

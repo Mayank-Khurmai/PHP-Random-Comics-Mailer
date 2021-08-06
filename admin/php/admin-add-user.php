@@ -9,7 +9,7 @@ if(!isset($_SESSION['xkcd_admin']))
 
 require_once __DIR__."/database-connection.php";
 
-class main
+class add_user
 {
     private $db;
     private $query;
@@ -63,6 +63,6 @@ class main
     }
 }
 
-new main();
+new add_user();
 
 ?>

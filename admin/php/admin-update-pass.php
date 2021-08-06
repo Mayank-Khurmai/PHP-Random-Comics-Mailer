@@ -9,7 +9,7 @@ if(!isset($_SESSION['xkcd_admin']))
 
 require_once __DIR__."/database-connection.php";
 
-class main
+class update_pass
 {
     private $db;
     private $query;
@@ -67,6 +67,6 @@ class main
     }
 }
 
-new main();
+new update_pass();
 
 ?>

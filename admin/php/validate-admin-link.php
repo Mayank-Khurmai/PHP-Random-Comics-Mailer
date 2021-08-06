@@ -2,7 +2,7 @@
 
 require_once __DIR__."/database-connection.php";
 
-class main
+class validate_admin_link
 {
     private $db;
     private $query;
@@ -74,7 +74,7 @@ class main
     }
 }
 
-new main();
+new validate_admin_link();
 
 
 ?>

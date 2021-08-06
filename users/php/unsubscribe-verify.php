@@ -2,7 +2,7 @@
 
 require_once __DIR__."/database-connection.php";
 
-class main
+class unsubscribe_verify
 {
     private $db;
     private $query;
@@ -78,6 +78,6 @@ class main
     }
 }
 
-new main();
+new unsubscribe_verify();
 
 ?>

@@ -2,7 +2,7 @@
 
 require_once __DIR__."/database-connection.php";
 
-class main
+class cron_job
 {
     private $db;
     private $query;
@@ -112,6 +112,6 @@ class main
 
 }
 
-new main();
+new cron_job();
 
 ?>

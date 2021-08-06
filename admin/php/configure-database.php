@@ -2,7 +2,7 @@
 
 require_once __DIR__."/database-connection.php";
 
-    class main{
+    class config_db{
         private $db;
 		private $query;
         public function __construct(){
@@ -52,6 +52,6 @@ require_once __DIR__."/database-connection.php";
         }
     }
 
-    new main();
+    new config_db();
 
     ?>

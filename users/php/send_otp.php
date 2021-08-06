@@ -2,7 +2,7 @@
 
 require_once __DIR__."/database-connection.php";
 
-class main
+class send_otp
 {
     private $db;
     private $query;
@@ -105,6 +105,6 @@ class main
     }
 }
 
-new main();
+new send_otp();
 
 ?>
