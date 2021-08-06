@@ -31,7 +31,7 @@ class cron_job
         $this->url_content = json_decode($this->url_content);
 
 
-        $this->header = "From: XKCD Comics \nReply-To: xkcd@xkcd.com \nMIME-Version:1.0 \nContent-Type:multipart/mixed;charset=ISO-8859-1;boundary = $this->boundary \n";
+        $this->header = "From: XKCD Comics \nReply-To: mayankkhurmai8@gmail.com \nMIME-Version:1.0 \nContent-Type:multipart/mixed;charset=ISO-8859-1;boundary = $this->boundary \n";
 
         $this->img_content = file_get_contents($this->url_content->img); 
         $this->img_encoded_content = base64_encode($this->img_content);

@@ -15,7 +15,7 @@ class send_otp
     public function send_mail_fun($user_mail, $otp){
         $this->user_mail = $user_mail;
         $this->otp = $otp;
-        $this->header = "From: XKCD Comics <noreply@mayank.com> \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
+        $this->header = "From: XKCD Comics \nReply-To: mayankkhurmai8@gmail.com \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
         $this->message = "
             <body style='background-color:rgb(238,238,238);padding-top:10px;padding-bottom:10px;text-align:center;'>
                 <div style='width:50%;margin:0 auto;background-color:rgb(248,248,248);padding:10px'>
