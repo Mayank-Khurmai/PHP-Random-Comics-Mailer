@@ -59,7 +59,7 @@ class main
                 echo "Email Unsubscribed";
             }
             else{
-                echo "Please try Again 1";
+                echo "Please try Again";
             }
         } 
         else{
