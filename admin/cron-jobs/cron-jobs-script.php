@@ -24,21 +24,18 @@ class main
         $this->send_mail = $user_mail;
         $this->boundary = md5("random");
 
-        // Fetching and Sanitizing content from xkcd
-        $this->header_array = get_headers("https://c.xkcd.com/random/comic",1);   // fetch all the headers sent by the server in the response of an HTTP request and non-negative integer give it as associative array                              
+        $this->header_array = get_headers("https://c.xkcd.com/random/comic",1);                              
         $this->url_location = $this->header_array['Location'][1]; 
-        $this->url = $this->url_location.'/info.0.json'; // path to your JSON        
-        $this->url_content = file_get_contents($this->url); // put the contents of the file into a variable
+        $this->url = $this->url_location.'/info.0.json';      
+        $this->url_content = file_get_contents($this->url);
         $this->url_content = json_decode($this->url_content);
 
 
         $this->header = "From: XKCD Comics \nReply-To: xkcd@xkcd.com \nMIME-Version:1.0 \nContent-Type:multipart/mixed;charset=ISO-8859-1;boundary = $this->boundary \n";
 
-        // Fetching the Image from image URL
         $this->img_content = file_get_contents($this->url_content->img); 
         $this->img_encoded_content = base64_encode($this->img_content);
 
-        //Adding Display Content
         $this->comic_desc = str_replace(array('(', ')', 'alt', '<','>', '"..."', '...'), '', $this->url_content->transcript);
         $this->comic_desc = str_replace(array('#'), "<br>",$this->comic_desc);
         $this->comic_desc = str_replace(array('[[','{{'), "<br><b>",$this->comic_desc);
@@ -64,7 +61,6 @@ class main
 
 
 
-        // Adding the encoded image as attachment
         $this->msg_body .="--$this->boundary\n";
         $this->msg_body .="Content-Type: image/*; name=".$this->url_content->num."\n";
         $this->msg_body .="Content-Disposition: attachment; filename=".$this->url_content->num.".png\n";
@@ -72,7 +68,6 @@ class main
         $this->msg_body .="X-Attachment-Id: ".rand(1000, 99999)."\n";
         $this->msg_body .= $this->img_encoded_content;
 
-        // Final function to send mail using SMTP
         mail($this->send_mail,"#".$this->url_content->num." - ".$this->url_content->title,$this->msg_body,$this->header);
     }
 
@@ -95,11 +90,6 @@ class main
 
     public function __destruct()
     {
-        // echo "Currently used memory : ";
-        // echo memory_get_usage()/1024;
-   
-        // echo "<br>Peak used memory : ";
-        // echo memory_get_peak_usage()/1024;
     
         unset($this->db);
         unset($this->query);
