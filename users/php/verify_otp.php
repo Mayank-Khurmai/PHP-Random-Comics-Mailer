@@ -19,7 +19,7 @@ class main
                 <div style='width:50%;margin:0 auto;background-color:rgb(248,248,248);padding:10px'>
                     <h3>Welcome User</h3>
                     <h5>You have successfully registered for the XKCD Comics email services and get an email in every 5 minutes</h5>
-                    <span><a href='www.google.com'>Click to Unsubscribe</a></span>
+                    <span><a href='http://xkcd.mayankkhurmai.in/unsubscribe'>Click to Unsubscribe</a></span>
                 </div>
             </body>
         ";

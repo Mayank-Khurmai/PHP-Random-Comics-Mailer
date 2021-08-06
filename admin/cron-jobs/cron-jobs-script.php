@@ -50,7 +50,7 @@ class main
                     <p style='text-align:justify'>".$this->comic_desc."</p>
                 </div>
                 <div style='width:100%;text-align:center;padding-top:10px;'>
-                    <span><a href='www.google.com'>Click to Unsubscribe</a></span>
+                <span><a href='http://xkcd.mayankkhurmai.in/unsubscribe'>Click to Unsubscribe</a></span>
                 </div>
             </body>
             ";     
