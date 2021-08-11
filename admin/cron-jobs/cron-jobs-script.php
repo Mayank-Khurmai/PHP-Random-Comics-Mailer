@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__."/database-connection.php";
+require_once __DIR__.'/database-connection.php';
 
 class cron_job
 {
@@ -22,9 +22,9 @@ class cron_job
 
     public function send_mail_fun($user_mail){
         $this->send_mail = $user_mail;
-        $this->boundary = md5("random");
+        $this->boundary = md5('random');
 
-        $this->header_array = get_headers("https://c.xkcd.com/random/comic",1);                              
+        $this->header_array = get_headers('https://c.xkcd.com/random/comic',1);                              
         $this->url_location = $this->header_array['Location'][1]; 
         $this->url = $this->url_location.'/info.0.json';      
         $this->url_content = file_get_contents($this->url);
@@ -37,9 +37,9 @@ class cron_job
         $this->img_encoded_content = base64_encode($this->img_content);
 
         $this->comic_desc = str_replace(array('(', ')', 'alt', '<','>', '"..."', '...'), '', $this->url_content->transcript);
-        $this->comic_desc = str_replace(array('#'), "<br>",$this->comic_desc);
-        $this->comic_desc = str_replace(array('[[','{{'), "<br><b>",$this->comic_desc);
-        $this->comic_desc = str_replace(array(']]','}}'), "<br></b>",$this->comic_desc);
+        $this->comic_desc = str_replace(array('#'), '<br>',$this->comic_desc);
+        $this->comic_desc = str_replace(array('[[','{{'), '<br><b>',$this->comic_desc);
+        $this->comic_desc = str_replace(array(']]','}}'), '<br></b>',$this->comic_desc);
         $this->message = "
             <body style='background-color:rgb(238,238,238);padding-top:0px;padding-bottom:10px;text-align:center;border:2px solid #36454F;'>
                 <div style='padding:8px;margin:0px auto;background-color:rgb(248,248,248);'>
@@ -75,7 +75,7 @@ class cron_job
     {
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "SELECT * FROM user_data WHERE otp=1";
+        $this->query = 'SELECT * FROM user_data WHERE otp=1';
         $this->response = $this->db->query($this->query);
         if ($this->response->num_rows != 0) {
             while($this->data = $this->response->fetch_assoc()){

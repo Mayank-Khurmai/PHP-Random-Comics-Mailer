@@ -3,11 +3,11 @@
 session_start();
 if(!isset($_SESSION['xkcd_admin']))
 {
-    header("Location: http://localhost/php-Mayank-Khurmai/admin/");
+    header('Location: http://localhost/php-Mayank-Khurmai/admin/');
     exit();
 }
 
-require_once __DIR__."/database-connection.php";
+require_once __DIR__.'/database-connection.php';
 
 class update_user_details
 {
@@ -21,17 +21,17 @@ class update_user_details
     public function __construct()
     {
         if(isset($_POST['id']) & isset($_POST['email']) & isset($_POST['count']) & isset($_POST['status'])){
-            $this->user_id = $_POST["id"];
-            $this->user_mail = $_POST["email"];
-            $this->count = $_POST["count"];
-            $this->status = $_POST["status"];
+            $this->user_id = $_POST['id'];
+            $this->user_mail = $_POST['email'];
+            $this->count = $_POST['count'];
+            $this->status = $_POST['status'];
         }
         else{
-            echo "Please try Again";
+            echo 'Please try Again';
             exit();
         }
         if (!filter_var($this->user_mail, FILTER_VALIDATE_EMAIL)) {
-            echo "Please try Again";
+            echo 'Please try Again';
             exit();
         }
         $this->db = new db();
@@ -48,14 +48,14 @@ class update_user_details
         $this->status = trim($this->status);
         $this->status = htmlspecialchars($this->status,ENT_QUOTES);
         $this->status = mysqli_real_escape_string($this->db,$this->status);
-        $this->query = $this->db->prepare("UPDATE user_data SET email=?, otp=?, count=? WHERE id=?");
+        $this->query = $this->db->prepare('UPDATE user_data SET email=?, otp=?, count=? WHERE id=?');
         $this->query->bind_param('siii',$this->user_mail,$this->status,$this->count,$this->user_id);
         $this->query->execute();
         if($this->query->affected_rows!=0){
-            echo "Success";
+            echo 'Success';
         }
         else{
-            echo "Please try Again";
+            echo 'Please try Again';
         }
         $this->db->close();
     }

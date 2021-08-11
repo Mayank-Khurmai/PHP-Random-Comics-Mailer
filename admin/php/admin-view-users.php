@@ -3,11 +3,11 @@
 session_start();
 if(!isset($_SESSION['xkcd_admin']))
 {
-    header("Location: http://localhost/php-Mayank-Khurmai/admin/");
+    header('Location: http://localhost/php-Mayank-Khurmai/admin/');
     exit();
 }
 
-require_once __DIR__."/database-connection.php";
+require_once __DIR__.'/database-connection.php';
 
 class view_users
 {
@@ -19,7 +19,7 @@ class view_users
     {
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "SELECT * FROM user_data";
+        $this->query = 'SELECT * FROM user_data';
         $this->response = $this->db->query($this->query);
         if ($this->response->num_rows != 0) {
             while($this->data = $this->response->fetch_assoc()){

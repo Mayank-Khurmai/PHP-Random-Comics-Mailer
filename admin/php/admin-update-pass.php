@@ -3,11 +3,11 @@
 session_start();
 if(!isset($_SESSION['xkcd_admin']))
 {
-    header("Location: http://localhost/php-Mayank-Khurmai/admin/");
+    header('Location: http://localhost/php-Mayank-Khurmai/admin/');
     exit();
 }
 
-require_once __DIR__."/database-connection.php";
+require_once __DIR__.'/database-connection.php';
 
 class update_pass
 {
@@ -22,15 +22,15 @@ class update_pass
     public function __construct()
     {
         if(isset($_POST['cpass']) & isset($_POST['npass'])){
-            $this->cpass = $_POST["cpass"];
+            $this->cpass = $_POST['cpass'];
             $this->cpass = base64_decode($this->cpass);
             $this->cpass = md5($this->cpass);
-            $this->npass = $_POST["npass"];
+            $this->npass = $_POST['npass'];
             $this->npass = base64_decode($this->npass);
             $this->npass = md5($this->npass);
         }
         else{
-            echo "Please try Again";
+            echo 'Please try Again';
             exit();
         }
         $this->db = new db();
@@ -43,14 +43,14 @@ class update_pass
             $this->query = "UPDATE admin_login SET pass='$this->npass' WHERE email='$this->admin_mail'";
             $this->response = $this->db->query($this->query);
             if ($this->db->query($this->query)) {
-                echo "Password Changed";
+                echo 'Password Changed';
             } 
             else {
-                echo "Please try Again";
+                echo 'Please try Again';
             }
         }
         else{
-            echo "Incorrect Password";
+            echo 'Incorrect Password';
         }
         $this->db->close();
     }

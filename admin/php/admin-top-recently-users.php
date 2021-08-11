@@ -3,11 +3,11 @@
 session_start();
 if(!isset($_SESSION['xkcd_admin']))
 {
-    header("Location: http://localhost/php-Mayank-Khurmai/admin/");
+    header('Location: http://localhost/php-Mayank-Khurmai/admin/');
     exit();
 }
 
-require_once __DIR__."/database-connection.php";
+require_once __DIR__.'/database-connection.php';
 
 class top_recently_users
 {
@@ -21,14 +21,14 @@ class top_recently_users
     {
         $this->db = new db();
         $this->db = $this->db->database();
-        $this->query = "SELECT * FROM user_data ORDER BY count DESC LIMIT 5";
+        $this->query = 'SELECT * FROM user_data ORDER BY count DESC LIMIT 5';
         $this->response = $this->db->query($this->query);
         if ($this->response->num_rows != 0) {
             while($this->data = $this->response->fetch_assoc()){
                 array_push($this->top_users,$this->data);
             }
             array_push($this->all_data,$this->top_users);
-            $this->query = "SELECT * FROM user_data ORDER BY date DESC LIMIT 5";
+            $this->query = 'SELECT * FROM user_data ORDER BY date DESC LIMIT 5';
             $this->response = $this->db->query($this->query);
             if ($this->response->num_rows != 0) {
                 while($this->data = $this->response->fetch_assoc()){
