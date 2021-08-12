@@ -2,7 +2,7 @@
     session_start();
     if(!isset($_SESSION['xkcd_admin']))
     {
-        header('Location: http://localhost/php-Mayank-Khurmai/admin/');
+        header('Location: ../');
         exit();
     }
 ?>

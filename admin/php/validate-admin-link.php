@@ -19,11 +19,11 @@ class validate_admin_link
             date_default_timezone_set('Asia/Kolkata');   
         } 
         else {
-            header('Location: http://localhost/php-Mayank-Khurmai/admin/');
+            header('Location: ../');
             exit();
         }
         if (!filter_var($this->admin_mail, FILTER_VALIDATE_EMAIL)) {
-            header('Location: http://localhost/php-Mayank-Khurmai/admin/');
+            header('Location: ../');
             exit();
         }
 
@@ -47,18 +47,18 @@ class validate_admin_link
                 session_start();
                 $_SESSION['xkcd_admin'] = $this->admin_hash_otp;
                 $this->db->close();
-                header('Location: http://localhost/php-Mayank-Khurmai/admin/php/admin-home.php');
+                header('Location: ./admin-home.php');
                 exit();
             }
             else{
                 $this->db->close();
-                header('Location: http://localhost/php-Mayank-Khurmai/admin/');
+                header('Location: ../');
                 exit();
             }
         } 
         else{
             $this->db->close();
-            header('Location: http://localhost/php-Mayank-Khurmai/admin/');
+            header('Location: ../');
             exit();
         }
     }
