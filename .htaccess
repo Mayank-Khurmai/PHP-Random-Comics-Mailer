@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteRule ^unsubscribe$ users/php/unsubscribe.php [L]
+RewriteRule ^admin$ admin/index.php [L]
+RewriteRule ^admin-configure-db$ admin/php/configure-database.php [L]
+
+
+ErrorDocument 404 http://xkcd.mayankkhurmai.in/
+ErrorDocument 403 http://xkcd.mayankkhurmai.in/
+
+Options -Indexes
