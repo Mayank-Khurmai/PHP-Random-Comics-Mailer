@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/database-connection.php';
+require_once '../config/config.php';
 
 class verify_otp
 {
@@ -10,10 +11,11 @@ class verify_otp
     private $otp;
     private $header;
     private $message;
+    private $config;
 
     public function send_mail_fun($user_mail){
+        $this->config = new config();
         $this->user_mail = $user_mail;
-        $this->header = "From: XKCD Comics \nReply-To: mayankkhurmai8@gmail.com \nMIME-Version:1.0 \nContent-Type:text/html;charset=ISO-8859-1 \n";
         $this->message = '
             <body style=\'background-color:rgb(238,238,238);padding-top:10px;padding-bottom:10px;text-align:center;\'>
                 <div style=\'width:50%;margin:0 auto;background-color:rgb(248,248,248);padding:10px\'>
@@ -24,7 +26,7 @@ class verify_otp
             </body>
         ';
        
-        mail($this->user_mail,'Email Subscription',$this->message,$this->header);
+        mail($this->user_mail,'Email Subscription',$this->message,$this->config->header);
     }
 
     public function __construct()
@@ -80,6 +82,7 @@ class verify_otp
         unset($this->otp);
         unset($this->header);
         unset($this->message);
+        unset($this->config);
     }
 }
 
